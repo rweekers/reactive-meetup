@@ -6,4 +6,4 @@ This workshop is meant to get familiar with RxJS or RxJava (which are part of th
 
 ## Installation and usage
 
-The repository contains two directories: a `JS` directory and a `Java` directory. Instructions for installation and usage can be found there.
+The repository contains two directories: a `JS` directory and a `java` directory. Instructions for installation and usage can be found there.
