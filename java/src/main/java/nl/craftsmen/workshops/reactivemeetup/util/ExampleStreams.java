@@ -1,9 +1,10 @@
 package nl.craftsmen.workshops.reactivemeetup.util;
 
-import java.util.concurrent.TimeUnit;
-
+import nl.craftsmen.workshops.reactivemeetup.domain.EIngredientType;
 import nl.craftsmen.workshops.reactivemeetup.domain.Ingredient;
 import rx.Observable;
+
+import java.util.concurrent.TimeUnit;
 
 public class ExampleStreams {
 
@@ -20,7 +21,9 @@ public class ExampleStreams {
     }
 
     public static Observable<Ingredient> ingredient$() {
-        return sample(Observable.from(new Ingredient[]{new Ingredient("Meel", "Basis"), new Ingredient("Suiker", "Smaak"), new Ingredient("Aardbei", "Fruit"), new Ingredient("Zout", "Basis"), new Ingredient("Annanas", "Fruit")}), 500);
+        return sample(Observable.from(new Ingredient[]{new Ingredient("Meel", EIngredientType.BASE),
+                new Ingredient("Suiker", EIngredientType.SWEET), new Ingredient("Aardbei", EIngredientType.FRUIT),
+                new Ingredient("Zout", EIngredientType.BASE), new Ingredient("Annanas", EIngredientType.FRUIT)}), 500);
     }
 
 }
