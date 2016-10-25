@@ -4,7 +4,6 @@ public class Triangle implements IShape {
 
     private final int base;
     private final int height;
-
     public Triangle(int base, int height) {
         this.base = base;
         this.height = height;
