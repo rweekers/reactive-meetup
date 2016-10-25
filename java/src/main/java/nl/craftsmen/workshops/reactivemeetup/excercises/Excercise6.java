@@ -21,6 +21,6 @@ public class Excercise6 {
                 })
                 .subscribe(System.out::println);
 
-        Thread.sleep(5000);
+        Thread.sleep(6000);
     }
 }

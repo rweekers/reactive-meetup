@@ -10,6 +10,6 @@ public class Excercise4 {
 		Observable<Integer> number$ = ExampleStreams.number$();
 		number$.filter((i) -> Utils.isPrime(i)).subscribe(System.out::println);
 
-		Thread.sleep(5000);
+		Thread.sleep(6000);
 	}
 }

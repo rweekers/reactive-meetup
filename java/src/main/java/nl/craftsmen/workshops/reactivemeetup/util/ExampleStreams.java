@@ -26,4 +26,12 @@ public class ExampleStreams {
                 new Ingredient("Zout", EIngredientType.BASE), new Ingredient("Annanas", EIngredientType.FRUIT)}), 500);
     }
 
+    public static Observable<String> word$() {
+        return sample(Observable.from(new String[] {new String("Jirble:"), new String("spill"), new String("a"),
+                new String("liquid"), new String("by"), new String("shaking"), new String("or"), new String("unsteady"),
+                new String("moving"), new String("of"), new String("the"), new String("vessel")}), 500);
+
+
+    }
+
 }

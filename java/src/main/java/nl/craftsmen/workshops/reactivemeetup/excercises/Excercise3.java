@@ -9,6 +9,6 @@ public class Excercise3 {
 		Observable<Integer> number$ = ExampleStreams.number$();
 		number$.filter((i) -> i % 2 == 0).subscribe(System.out::println);
 		
-		Thread.sleep(5000);
+		Thread.sleep(6000);
 	}
 }

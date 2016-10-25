@@ -11,6 +11,6 @@ public class Excercise7 {
 				.scan((sum, item) -> sum + item)
 				.subscribe(System.out::println);
 
-		Thread.sleep(5000);
+		Thread.sleep(6000);
 	}
 }
