@@ -13,7 +13,7 @@ public class Exercise08 {
     public static void main(String[] args) {
         Observable<Ingredient> ingredient$ = ExampleStreams.ingredient$();
 
-        // ASSIGNMENT: make a cake using the only fruits from the ingredient$ stream.
+        // ASSIGNMENT: Make a cake using the only fruits from the ingredient$ stream.
         //
         // HINT: Start by selecting the ingredients that you are going to use for the cake.
         //
