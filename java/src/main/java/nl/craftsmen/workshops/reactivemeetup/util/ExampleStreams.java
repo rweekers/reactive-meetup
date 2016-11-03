@@ -36,4 +36,8 @@ public class ExampleStreams {
                 new Square("Square 30", 30), new Triangle("Triangle 40x45", 40, 45), new Rectangle("Rectangle 10x70", 10, 70)}), 500);
     }
 
+    public static Observable<Integer> point$() {
+        return sample(Observable.from(new Integer[] {0, 3, 0, 3, 1, 3, 0, 0, 3, 0}), 500);
+    }
+
 }
