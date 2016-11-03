@@ -1,5 +1,7 @@
 package nl.craftsmen.workshops.reactivemeetup.exercises;
 
+import static nl.craftsmen.workshops.reactivemeetup.util.Utils.waitForStreamToComplete;
+
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import rx.Observable;
 
@@ -14,7 +16,7 @@ public class Exercise02 {
 			()      -> System.out.println("completed")
 		);
 		
-		Thread.sleep(6000);
+		waitForStreamToComplete(number$);
 	}
 
 }

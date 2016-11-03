@@ -2,6 +2,8 @@ package nl.craftsmen.workshops.reactivemeetup.util;
 
 import java.text.NumberFormat;
 
+import rx.Observable;
+
 public class Utils {
 	
 	public static final NumberFormat NUMBER_FORMAT;
@@ -31,5 +33,9 @@ public class Utils {
 			}
 		}
 		return true;
+	}
+	
+	public static <T> void waitForStreamToComplete(Observable<T> stream) {
+		stream.toBlocking().last();
 	}
 }
