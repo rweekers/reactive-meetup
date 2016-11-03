@@ -1,8 +1,11 @@
 package nl.craftsmen.workshops.reactivemeetup.util;
 
-import java.text.NumberFormat;
-
 import rx.Observable;
+
+import java.text.NumberFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.concurrent.TimeUnit;
 
 public class Utils {
 	
@@ -13,6 +16,14 @@ public class Utils {
 		NUMBER_FORMAT.setMaximumFractionDigits(2);
 		NUMBER_FORMAT.setMinimumFractionDigits(2);
 	}
+
+	static <T> Observable<T> sample(Observable<T> stream, int interval) {
+		return Observable.interval(interval, TimeUnit.MILLISECONDS).zipWith(stream, (Long a, T b) -> b);
+	}
+
+	public static ZonedDateTime getZonedDateTime(int hour, int minute) {
+        return ZonedDateTime.of(2016, 12, 16, hour, minute, 0, 0, ZoneId.of("Europe/Amsterdam"));
+    }
 
 	public static boolean isPrime(Integer n) {
 		if (n < 1) {

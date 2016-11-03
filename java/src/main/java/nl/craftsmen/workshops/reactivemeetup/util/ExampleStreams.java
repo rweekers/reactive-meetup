@@ -5,7 +5,7 @@ import nl.craftsmen.workshops.reactivemeetup.domain.cooking.Ingredient;
 import nl.craftsmen.workshops.reactivemeetup.domain.geometry.*;
 import rx.Observable;
 
-import java.util.concurrent.TimeUnit;
+import static nl.craftsmen.workshops.reactivemeetup.util.Utils.sample;
 
 public class ExampleStreams {
 
@@ -15,10 +15,6 @@ public class ExampleStreams {
 
     public static Observable<Integer> numbersWithError$() {
         return number$().take(4).concatWith(Observable.error(new RuntimeException("uh oh! an error!")));
-    }
-
-    private static <T> Observable<T> sample(Observable<T> stream, int interval) {
-        return Observable.interval(interval, TimeUnit.MILLISECONDS).zipWith(stream, (Long a, T b) -> b);
     }
 
     public static Observable<Ingredient> ingredient$() {
