@@ -3,7 +3,7 @@ package nl.craftsmen.workshops.reactivemeetup.domain.railway;
 public enum ERailwayStation {
 
     AMS,
-    UTR,
+    DB,
     DH,
     AMR;
 

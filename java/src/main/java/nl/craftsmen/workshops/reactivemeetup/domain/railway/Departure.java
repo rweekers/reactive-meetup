@@ -7,7 +7,7 @@ public class Departure {
 
     private final ZonedDateTime departureTime;
     private final RailwayStation destination;
-    private Duration delay;
+    private Duration delay = Duration.ZERO;
 
     public Departure(ZonedDateTime time, RailwayStation destination) {
         this.departureTime = time;
@@ -23,15 +23,11 @@ public class Departure {
         return destination;
     }
 
-    public void addDelay(Duration delay) {
-        this.delay = delay;
-    }
-
     public ZonedDateTime getDepartureTime() {
         return departureTime;
     }
 
-    public ZonedDateTime getRealDepartureTime() {
-        return departureTime.plus(delay);
+    public Duration getDelay() {
+        return delay;
     }
 }
