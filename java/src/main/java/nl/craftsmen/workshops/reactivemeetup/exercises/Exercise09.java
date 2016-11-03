@@ -1,11 +1,11 @@
-package nl.craftsmen.workshops.reactivemeetup.excercises;
+package nl.craftsmen.workshops.reactivemeetup.exercises;
 
 import nl.craftsmen.workshops.reactivemeetup.domain.IShape;
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import nl.craftsmen.workshops.reactivemeetup.util.Utils;
 import rx.Observable;
 
-public class Excercise09 {
+public class Exercise09 {
 
 	public static void main(String[] args) throws InterruptedException {
 		

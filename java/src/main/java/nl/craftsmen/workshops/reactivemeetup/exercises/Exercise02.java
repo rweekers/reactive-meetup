@@ -1,9 +1,9 @@
-package nl.craftsmen.workshops.reactivemeetup.excercises;
+package nl.craftsmen.workshops.reactivemeetup.exercises;
 
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import rx.Observable;
 
-public class Excercise02 {
+public class Exercise02 {
 
 	public static void main(String[] args) throws InterruptedException {
 		Observable<Integer> number$ = ExampleStreams.numbersWithError$();

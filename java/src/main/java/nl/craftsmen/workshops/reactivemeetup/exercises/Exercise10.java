@@ -1,11 +1,11 @@
-package nl.craftsmen.workshops.reactivemeetup.excercises;
+package nl.craftsmen.workshops.reactivemeetup.exercises;
 
 import nl.craftsmen.workshops.reactivemeetup.domain.IShape;
 import nl.craftsmen.workshops.reactivemeetup.domain.Subtotal;
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import rx.Observable;
 
-public class Excercise10 {
+public class Exercise10 {
 
     public static void main(String[] args) throws InterruptedException {
         Observable<IShape> shape$ = ExampleStreams.shape$();
