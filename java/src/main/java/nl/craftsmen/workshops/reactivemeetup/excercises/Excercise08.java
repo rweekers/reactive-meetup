@@ -6,7 +6,7 @@ import nl.craftsmen.workshops.reactivemeetup.domain.Ingredient;
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import rx.Observable;
 
-public class Excercise6 {
+public class Excercise08 {
 
     public static void main(String[] args) throws InterruptedException {
         Observable<Ingredient> ingredient$ = ExampleStreams.ingredient$();
