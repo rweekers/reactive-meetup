@@ -14,7 +14,7 @@ public class Excercise11 {
                         return a;
                     return b;
 				})
-                .map((i) -> i.getClass().getSimpleName() + " " + i.calculateArea())
+                .map((i) -> i.getName() + ": " + i.calculateArea())
 				.subscribe(System.out::println);
 
 		Thread.sleep(6000);

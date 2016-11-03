@@ -6,4 +6,6 @@ public interface IShape {
 
     double calculateCircumference();
 
+    String getName();
+
 }

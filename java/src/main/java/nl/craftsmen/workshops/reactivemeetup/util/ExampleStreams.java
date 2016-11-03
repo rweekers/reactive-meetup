@@ -26,13 +26,14 @@ public class ExampleStreams {
     }
 
     public static Observable<String> word$() {
-        return sample(Observable.from(new String[] {"Jirble:", "spill", "a", "liquid", "by", "shaking", "or", "unsteady",
+        return sample(Observable.from(new String[]{"Jirble:", "spill", "a", "liquid", "by", "shaking", "or", "unsteady",
                 "moving", "of", "the", "vessel"}), 500);
     }
 
     public static Observable<IShape> shape$() {
-        return sample(Observable.from(new IShape[] { new Circle(30), new Square(20),
-                new Rectangle(50, 20), new Triangle(40, 10) }), 500);
+        return sample(Observable.from(new IShape[]{new Circle("Circle 30", 30), new Circle("Circle 40", 40), new Square("Square 20", 20),
+                new Rectangle("Rectangle 50x20", 50, 20), new Triangle("Triangle 40x10", 40, 10), new Rectangle("Rectangle 45x40", 45, 40),
+                new Square("Square 30", 30), new Triangle("Triangle 40x45", 40, 45), new Rectangle("Rectangle 10x70", 10, 70)}), 500);
     }
 
 }
