@@ -1,4 +1,4 @@
-package nl.craftsmen.workshops.reactivemeetup.exercises;
+package nl.craftsmen.workshops.reactivemeetup.exercises.one;
 
 import static nl.craftsmen.workshops.reactivemeetup.util.Utils.waitForStreamToComplete;
 

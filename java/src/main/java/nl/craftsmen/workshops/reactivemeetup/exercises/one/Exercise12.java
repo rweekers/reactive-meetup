@@ -1,4 +1,4 @@
-package nl.craftsmen.workshops.reactivemeetup.exercises;
+package nl.craftsmen.workshops.reactivemeetup.exercises.one;
 
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import rx.Observable;
