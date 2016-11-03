@@ -20,9 +20,9 @@ public class ExampleStreams {
     }
 
     public static Observable<Ingredient> ingredient$() {
-        return sample(Observable.from(new Ingredient[]{new Ingredient("Meel", EIngredientType.BASE),
-                new Ingredient("Suiker", EIngredientType.SWEET), new Ingredient("Aardbei", EIngredientType.FRUIT),
-                new Ingredient("Zout", EIngredientType.BASE), new Ingredient("Annanas", EIngredientType.FRUIT)}), 500);
+        return sample(Observable.from(new Ingredient[]{new Ingredient("Flour", EIngredientType.BASE),
+                new Ingredient("Suger", EIngredientType.SWEET), new Ingredient("Strawberry", EIngredientType.FRUIT),
+                new Ingredient("Salt", EIngredientType.BASE), new Ingredient("Pineapple", EIngredientType.FRUIT)}), 500);
     }
 
     public static Observable<String> word$() {

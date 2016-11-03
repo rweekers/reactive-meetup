@@ -1,19 +1,28 @@
 package nl.craftsmen.workshops.reactivemeetup.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Cake {
 
     private final String name;
-    private final List<Ingredient> ingredients = new ArrayList<>();
+    private final List<Ingredient> ingredients;
 
     public Cake(String name) {
-        this.name = name;
+        this(name, Arrays.asList());
+    }
+    
+    public Cake(String name, List<Ingredient> ingredients) {
+    	this.name = name;
+    	this.ingredients = new ArrayList<>(ingredients);
     }
 
-    public void addIngredient(Ingredient ingredient) {
-        ingredients.add(ingredient);
+    public Cake addIngredient(Ingredient ingredient) {
+    	List<Ingredient> newIngredients = new ArrayList<>(ingredients);
+    	newIngredients.add(ingredient);
+    	
+    	return new Cake(name, newIngredients);
     }
 
     public String toString() {

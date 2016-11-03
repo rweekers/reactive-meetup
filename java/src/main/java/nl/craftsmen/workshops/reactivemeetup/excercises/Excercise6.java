@@ -11,14 +11,9 @@ public class Excercise6 {
     public static void main(String[] args) throws InterruptedException {
         Observable<Ingredient> ingredient$ = ExampleStreams.ingredient$();
 
-        Cake cake = new Cake("Fruitcake");
-
         ingredient$
                 .filter((i) -> i.getType() == EIngredientType.FRUIT)
-                .map((i) ->  {
-                    cake.addIngredient(i);
-                    return cake;
-                })
+                .scan(new Cake("Fruitcake"), Cake::addIngredient)
                 .subscribe(System.out::println);
 
         Thread.sleep(6000);
