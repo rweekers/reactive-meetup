@@ -11,7 +11,6 @@ import static nl.craftsmen.workshops.reactivemeetup.util.Utils.waitForStreamToCo
 public class Exercise01 {
 
     public static void main(String[] args) {
-        RailwayStreams.buildStations();
 
         Observable<Departure> departure$ = RailwayStreams.departure$();
         departure$

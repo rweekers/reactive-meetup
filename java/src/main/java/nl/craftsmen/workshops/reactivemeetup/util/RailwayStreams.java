@@ -7,21 +7,18 @@ import nl.craftsmen.workshops.reactivemeetup.domain.railway.Train;
 import rx.Observable;
 
 import java.time.Duration;
-import java.util.HashMap;
 import java.util.Map;
 
 import static nl.craftsmen.workshops.reactivemeetup.util.Utils.sample;
 
 public class RailwayStreams {
 
-    private static Map<ERailwayStation, RailwayStation> stations = new HashMap<>();
-
-    public static void buildStations() {
-        stations.put(ERailwayStation.AMS, new RailwayStation(ERailwayStation.AMS, "Amsterdam CS", 52.3791283, 4.8980833));
-        stations.put(ERailwayStation.DB, new RailwayStation(ERailwayStation.DB, "'s Hertogenbosch CS", 51.6905476,5.2913696));
-        stations.put(ERailwayStation.DH, new RailwayStation(ERailwayStation.DH, "Den Haag CS", 52.0809271, 4.3222312));
-        stations.put(ERailwayStation.AMR, new RailwayStation(ERailwayStation.AMR, "Amersfoort CS", 52.1530195,5.3711025));
-    }
+    private static Map<ERailwayStation, RailwayStation> stations = new MapBuilder<ERailwayStation, RailwayStation>()
+        .set(ERailwayStation.AMS, new RailwayStation(ERailwayStation.AMS, "Amsterdam CS", 52.3791283, 4.8980833))
+        .set(ERailwayStation.DB, new RailwayStation(ERailwayStation.DB, "'s Hertogenbosch CS", 51.6905476,5.2913696))
+        .set(ERailwayStation.DH, new RailwayStation(ERailwayStation.DH, "Den Haag CS", 52.0809271, 4.3222312))
+        .set(ERailwayStation.AMR, new RailwayStation(ERailwayStation.AMR, "Amersfoort CS", 52.1530195,5.3711025))
+        .build();
 
     public static Observable<Departure> departure$() {
         return sample(Observable.from(getDepartures()), 200);
