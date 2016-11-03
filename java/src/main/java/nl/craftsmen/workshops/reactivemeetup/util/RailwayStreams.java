@@ -72,4 +72,13 @@ public class RailwayStreams {
                         new Departure(Utils.getZonedDateTime(18, 35), stations.get(ERailwayStation.AMR))
                 };
     }
+
+    private Train[] getTrains() {
+        return new Train[] {
+                new Train("Utrecht CS-Amsterdam CS", 52.248962,5.0036328),
+                new Train("Utrecht CS-Den Haag CS", 52.0666685,4.8700748),
+                new Train("Utrecht CS-'s Hertogenbosch CS", 51.7903443,5.2662574),
+                new Train("Utrecht CS-Amersfoort CS", 52.1469975,5.3434571)
+        };
+    }
 }
