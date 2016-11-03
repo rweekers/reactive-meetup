@@ -1,6 +1,16 @@
 package nl.craftsmen.workshops.reactivemeetup.util;
 
+import java.text.NumberFormat;
+
 public class Utils {
+	
+	public static final NumberFormat NUMBER_FORMAT;
+	
+	static {
+		NUMBER_FORMAT = NumberFormat.getNumberInstance();
+		NUMBER_FORMAT.setMaximumFractionDigits(2);
+		NUMBER_FORMAT.setMinimumFractionDigits(2);
+	}
 
 	public static boolean isPrime(Integer n) {
 		if (n < 1) {
