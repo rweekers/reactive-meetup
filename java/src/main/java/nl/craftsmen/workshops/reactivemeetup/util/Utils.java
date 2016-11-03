@@ -36,6 +36,8 @@ public class Utils {
 	}
 	
 	public static <T> void waitForStreamToComplete(Observable<T> stream) {
-		stream.toBlocking().last();
+		stream
+			.onErrorReturn((error) -> null)
+			.toBlocking().last();
 	}
 }
