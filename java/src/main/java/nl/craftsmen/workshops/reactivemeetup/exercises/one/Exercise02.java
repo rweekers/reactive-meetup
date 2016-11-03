@@ -10,7 +10,8 @@ public class Exercise02 {
 	public static void main(String[] args) throws InterruptedException {
 		Observable<Integer> number$ = ExampleStreams.numbersWithError$();
 		
-		// Assignment: subscribe to the number$ stream and log each event (next, error, complete) to the console.
+		// ASSIGNMENT: Subscribe to the number$ stream and log each event (next, error, complete) to the console.
+		
 		number$.subscribe(
 			(value) -> System.out.println("next: " + value),
 			(error) -> System.out.println("error: " + error),

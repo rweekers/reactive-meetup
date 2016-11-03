@@ -11,10 +11,12 @@ public class Exercise01 {
 		// The number$ stream below will emit short a sequence of numbers with an interval of 1 second.
 		Observable<Integer> number$ = ExampleStreams.number$();
 		
-		// Assignment: subscribe to the number$ stream and print each number to the console.
-		// Hint: the following two expressions are equivalent:
+		// ASSIGNMENT: Subscribe to the number$ stream and print each number to the console.
+		//
+		// HINT: The following two expressions are equivalent:
 		//   (value) -> System.out.print(value)
 		//   System.out::println
+		
 		number$.subscribe(System.out::println);
 		
 		// The standard RxJava scheduler uses daemon threads by default. To make sure the application does not terminate
