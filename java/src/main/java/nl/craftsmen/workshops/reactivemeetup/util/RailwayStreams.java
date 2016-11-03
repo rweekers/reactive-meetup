@@ -25,7 +25,7 @@ public class RailwayStreams {
     }
 
     public static Observable<Train> train$() {
-        return sample(Observable.from(new Train[] {}), 200);
+        return sample(Observable.from(getTrains()), 200);
     }
 
     private static Departure[] getDepartures() {
@@ -70,12 +70,12 @@ public class RailwayStreams {
                 };
     }
 
-    private Train[] getTrains() {
+    private static Train[] getTrains() {
         return new Train[] {
-                new Train("Utrecht CS-Amsterdam CS", 52.248962,5.0036328),
-                new Train("Utrecht CS-Den Haag CS", 52.0666685,4.8700748),
-                new Train("Utrecht CS-'s Hertogenbosch CS", 51.7903443,5.2662574),
-                new Train("Utrecht CS-Amersfoort CS", 52.1469975,5.3434571)
+                new Train("Train A", 52.248962,5.0036328), // Utrecht - Amsterdam
+                new Train("Train A", 52.0666685,4.8700748), // Utrecht - Den Haag
+                new Train("Train A", 51.7903443,5.2662574), // Utrecht - 's Hertogenbosch
+                new Train("Train A", 52.1469975,5.3434571) // Utrecht - Amersfoort
         };
     }
 }
