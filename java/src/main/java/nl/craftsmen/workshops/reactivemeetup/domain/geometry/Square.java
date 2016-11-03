@@ -1,6 +1,6 @@
-package nl.craftsmen.workshops.reactivemeetup.domain;
+package nl.craftsmen.workshops.reactivemeetup.domain.geometry;
 
-public class Square implements  IShape {
+public class Square implements IShape {
 
     private String name;
     private final int width;

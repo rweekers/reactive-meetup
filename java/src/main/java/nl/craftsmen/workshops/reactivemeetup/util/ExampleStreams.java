@@ -1,6 +1,8 @@
 package nl.craftsmen.workshops.reactivemeetup.util;
 
-import nl.craftsmen.workshops.reactivemeetup.domain.*;
+import nl.craftsmen.workshops.reactivemeetup.domain.cooking.EIngredientType;
+import nl.craftsmen.workshops.reactivemeetup.domain.cooking.Ingredient;
+import nl.craftsmen.workshops.reactivemeetup.domain.geometry.*;
 import rx.Observable;
 
 import java.util.concurrent.TimeUnit;

@@ -1,4 +1,4 @@
-package nl.craftsmen.workshops.reactivemeetup.domain;
+package nl.craftsmen.workshops.reactivemeetup.domain.geometry;
 
 public class Rectangle implements IShape {
 

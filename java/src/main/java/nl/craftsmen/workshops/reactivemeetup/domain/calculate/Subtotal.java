@@ -1,4 +1,4 @@
-package nl.craftsmen.workshops.reactivemeetup.domain;
+package nl.craftsmen.workshops.reactivemeetup.domain.calculate;
 
 public class Subtotal {
 

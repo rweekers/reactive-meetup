@@ -2,7 +2,7 @@ package nl.craftsmen.workshops.reactivemeetup.exercises.one;
 
 import static nl.craftsmen.workshops.reactivemeetup.util.Utils.waitForStreamToComplete;
 
-import nl.craftsmen.workshops.reactivemeetup.domain.IShape;
+import nl.craftsmen.workshops.reactivemeetup.domain.geometry.IShape;
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import rx.Observable;
 
