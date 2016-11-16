@@ -7,3 +7,7 @@ This workshop is meant to get familiar with RxJS or RxJava (which are part of th
 ## Installation and usage
 
 The repository contains two directories: a `JS` directory and a `java` directory. Instructions for installation and usage can be found there.
+
+## Javascript
+
+For initializing the javascript environment type `npm install`. The various exercise files (e.g. `exercises/one/exercise-01.js`) can be run with the following command: `npm run dev <path to file>`.

@@ -1,4 +1,5 @@
 .idea
+javascript/node_modules/
 /.metadata/
 /RemoteSystemsTempFiles/
 *.iml
