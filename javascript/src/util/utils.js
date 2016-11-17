@@ -26,3 +26,24 @@ function isPrime(n) {
 }
 
 export { sample, isPrime };
+
+export class Ingredient {
+    constructor(name, type) {
+        this.name = name;
+        this.type = type;
+    }
+}
+
+export class Cake {
+    constructor(name) {
+        this.name = name;
+    }
+
+    addIngredient(ingredient) {
+        // TODO
+    }
+
+    getName() {
+        return 'TODO';
+    }
+}
