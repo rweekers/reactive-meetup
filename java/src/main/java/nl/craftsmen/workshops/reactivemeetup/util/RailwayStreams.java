@@ -2,16 +2,46 @@ package nl.craftsmen.workshops.reactivemeetup.util;
 
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.Departure;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.ERailwayStation;
+import nl.craftsmen.workshops.reactivemeetup.domain.railway.GateCheckEvent;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.RailwayStation;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.Train;
 import rx.Observable;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static nl.craftsmen.workshops.reactivemeetup.util.Utils.sample;
 
 public class RailwayStreams {
+	
+	private static Observable<GateCheckEvent> gateCheckEvent$;
+	
+	public static Observable<GateCheckEvent> gateCheckEvent$() {
+		
+		if (gateCheckEvent$ == null) {
+			gateCheckEvent$ = Observable.merge(Arrays.asList(
+				singleGateCheckEvent$(true,    233),
+				singleGateCheckEvent$(true,    978),
+				singleGateCheckEvent$(false,  1313),
+				singleGateCheckEvent$(true,   2105),
+				singleGateCheckEvent$(false,  3643),
+				singleGateCheckEvent$(false,  4411),
+				singleGateCheckEvent$(true,   5556),
+				singleGateCheckEvent$(false,  8123),
+				singleGateCheckEvent$(false,  9722),
+				singleGateCheckEvent$(true,  10880)
+			));
+		}
+		
+		return gateCheckEvent$;
+	}
+	
+	private static Observable<GateCheckEvent> singleGateCheckEvent$(boolean isCheckin, long delay) {
+		return Observable.from(Arrays.asList(new GateCheckEvent(isCheckin, System.currentTimeMillis() + delay)))
+			.delay(delay, TimeUnit.MILLISECONDS);
+	}
 
     private static Map<ERailwayStation, RailwayStation> stations = new MapBuilder<ERailwayStation, RailwayStation>()
         .set(ERailwayStation.AMS, new RailwayStation(ERailwayStation.AMS, "Amsterdam CS", 52.3791283, 4.8980833))
