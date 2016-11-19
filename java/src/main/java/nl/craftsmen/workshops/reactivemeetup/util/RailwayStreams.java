@@ -19,6 +19,10 @@ public class RailwayStreams {
         .set(ERailwayStation.DH, new RailwayStation(ERailwayStation.DH, "Den Haag CS", 52.0809271, 4.3222312))
         .set(ERailwayStation.AMR, new RailwayStation(ERailwayStation.AMR, "Amersfoort CS", 52.1530195,5.3711025))
         .build();
+    
+    public static RailwayStation getStation(ERailwayStation stationId) {
+    	return stations.get(stationId);
+    }
 
     public static Observable<Departure> departure$() {
         return sample(Observable.from(getDepartures()), 200);
