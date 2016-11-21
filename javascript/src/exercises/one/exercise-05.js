@@ -1,6 +1,6 @@
-import Rx from 'rxjs/Rx';
-import { number$ } from '../../util/example-streams.js';
+var Rx = require('rxjs/Rx');
+var streams = require('../../util/example-streams.js');
 
-number$
+streams.number$
     .map((i) => i * i)
     .subscribe((x) => console.log(x));

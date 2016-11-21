@@ -1,7 +1,7 @@
-import Rx from 'rxjs/Rx';
-import { number$ } from '../../util/example-streams.js';
+var Rx = require('rxjs/Rx');
+var streams = require('../../util/example-streams.js');
 
-number$
+streams.number$
     .scan((sum, item) => sum + item)
     .subscribe((x) => console.log(x));
 

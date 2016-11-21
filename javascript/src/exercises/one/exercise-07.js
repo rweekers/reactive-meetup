@@ -1,7 +1,7 @@
-import Rx from 'rxjs/Rx';
-import { word$ } from '../../util/example-streams.js';
+var Rx = require('rxjs/Rx');
+var streams = require('../../util/example-streams.js');
 
-word$
+streams.word$
     .scan((sum, item) => sum + ' ' + item)
     .subscribe((x) => console.log(x));
 

@@ -1,10 +1,10 @@
-import Rx from 'rxjs/Rx';
-import { ingredient$ } from '../../util/example-streams.js';
-import { Cake } from '../../util/utils.js';
+var Rx = require('rxjs/Rx');
+var streams = require('../../util/example-streams.js');
+var Ingredient = require('../../domain/ingredient');
+var Cake = require('../../domain/cake');
 
-const cake$ = ingredient$
-    .filter((ingredient) => ingredient.type === 'FRUIT')
+const cake$ = streams.ingredient$
+    .filter((ingredient) => ingredient.getType() === 'FRUIT')
     .scan((acc, cur) => acc.addIngredient(cur), new Cake("Fruitcake"));
 
 cake$.subscribe((x) => console.log(x.getName()));
-

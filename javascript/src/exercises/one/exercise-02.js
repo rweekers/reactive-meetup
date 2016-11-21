@@ -1,7 +1,7 @@
-import Rx from 'rxjs/Rx';
-import { numbersWithErrors$ } from '../../util/example-streams.js';
+var Rx = require('rxjs/Rx');
+var streams = require('../../util/example-streams.js');
 
-numbersWithErrors$.subscribe(
+streams.numbersWithErrors$.subscribe(
     (value) => console.log("next: " + value),
     (error) => console.log("error: " + error),
     ()      => console.log("completed")

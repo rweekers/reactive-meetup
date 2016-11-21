@@ -1,7 +1,7 @@
-import Rx from 'rxjs/Rx';
-import { number$ } from '../../util/example-streams.js';
-import { isPrime } from '../../util/utils.js';
+var Rx = require('rxjs/Rx');
+var isPrime = require('../../util/utils').isPrime;
+var streams = require('../../util/example-streams.js');
 
-number$
+streams.number$
     .filter((i) => isPrime(i))
     .subscribe((x) => console.log(x));

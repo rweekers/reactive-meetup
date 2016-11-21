@@ -1,10 +1,10 @@
-import Rx from 'rxjs/Rx';
+var Rx = require('rxjs/Rx');
 
-function sample(stream) {
+exports.sample = function(stream) {
     return Rx.Observable.interval(500).zip(stream, (a, b) => b);
 }
 
-function isPrime(n) {
+exports.isPrime = function(n) {
     if (n < 1) {
         return false;
     }
@@ -23,27 +23,4 @@ function isPrime(n) {
         }
     }
     return true;
-}
-
-export { sample, isPrime };
-
-export class Ingredient {
-    constructor(name, type) {
-        this.name = name;
-        this.type = type;
-    }
-}
-
-export class Cake {
-    constructor(name) {
-        this.name = name;
-    }
-
-    addIngredient(ingredient) {
-        // TODO
-    }
-
-    getName() {
-        return 'TODO';
-    }
 }

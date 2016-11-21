@@ -1,13 +1,16 @@
-import Rx from 'rxjs/Rx';
-import { sample, Ingredient } from './utils.js';
+var Rx = require('rxjs/Rx');
+var sample = require('./utils').sample;
+var Ingredient = require('../domain/ingredient');
 
-export const number$ = sample(Rx.Observable.of(1, 9, 4, 7, 6, 2, 2, 7, 3, 4, 8));
+const number$ = sample(Rx.Observable.of(1, 9, 4, 7, 6, 2, 2, 7, 3, 4, 8));
 
-export const numbersWithErrors$ = number$.take(4).concat(Observable.of(new Error("uh oh! an error!")));
+exports.number$ = number$;
 
-export const word$ = sample(Rx.Observable.of("Jirble:", "spill", "a", "liquid", "by", "shaking", "or", "unsteady",
+exports.numbersWithErrors$ = number$.take(4).concat(Rx.Observable.of(new Error("uh oh! an error!")));
+
+exports.word$ = sample(Rx.Observable.of("Jirble:", "spill", "a", "liquid", "by", "shaking", "or", "unsteady",
                 "moving", "of", "the", "vessel"));
 
-export const ingredient$ = sample(Rx.Observable.of(new Ingredient("Flour", "BASE"),
+exports.ingredient$ = sample(Rx.Observable.of(new Ingredient("Flour", "BASE"),
                 new Ingredient("Sugar", "SWEET"), new Ingredient("Strawberry", "FRUIT"),
                 new Ingredient("Salt", "BASE"), new Ingredient("Pineapple", "FRUIT")));
