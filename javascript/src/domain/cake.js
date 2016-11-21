@@ -1,24 +1,24 @@
-var method = Cake.prototype;
+module.exports = class Cake {
 
-var ingredient = require('./ingredient');
+    constructor(name) {
+        this.name = name;
+        this.ingredients = [];
+    }
 
-function Cake(name) {
-    this._name = name;
-    this._ingredients = [];
-}
+    getName() {
+        return this.name;
+    }
 
-method.getName = function() {
-    return this._name;
-};
+    addIngredient(i) {
+        this.ingredients.push(i);
+        return this;
+    }
 
-method.addIngredient = function(ingredient) {
-        this._ingredients.push(ingredient);
-}
-
-method.getIngredients = function() {
-    for (var ingredient in this._ingredients) {
-         console.log(ingredient.name);
+    createRecipe() {
+        let recipe = this.name + ': ';
+        for (let i of this.ingredients) {
+            recipe = recipe + i.getName().toLowerCase() + ' ';
+        }
+        return recipe;
     }
 }
-
-module.exports = Cake;

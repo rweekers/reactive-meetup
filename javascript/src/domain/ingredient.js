@@ -1,16 +1,15 @@
-var method = Ingredient.prototype;
+module.exports = class Ingredient {
 
-function Ingredient(name, type) {
-    this._name = name;
-    this._type = type;
+    constructor(name, type) {
+        this.name = name;
+        this.type = type;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    getType() {
+    return this.type;
+    }
 }
-
-method.getName = function() {
-    return this._name;
-};
-
-method.getType = function() {
-    return this._type;
-}
-
-module.exports = Ingredient;
