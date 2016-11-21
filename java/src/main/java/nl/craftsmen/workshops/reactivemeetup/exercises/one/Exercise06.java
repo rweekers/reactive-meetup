@@ -10,7 +10,7 @@ public class Exercise06 {
 	public static void main(String[] args) {
 		Observable<Integer> number$ = ExampleStreams.number$().take(5);
 		
-		// ASSIGNMENT: compute the sum of all numbers emitted by the number$ stream. The result should be stored a new stream
+		// ASSIGNMENT: Compute the sum of all numbers emitted by the number$ stream. The result should be stored a new stream
 		// that also contains the intermediate sums, for example given a stream of numbers 1, 2, 3, then the resulting stream
 		// should emit the numbers 3 (1 + 2) and 6 (3 + 3).
 		
