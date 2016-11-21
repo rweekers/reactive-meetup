@@ -5,6 +5,7 @@ public enum ERailwayStation {
     AMS,
     DB,
     DH,
-    AMR;
+    AMR,
+    UTR;
 
 }

@@ -6,19 +6,22 @@ import java.util.Date;
 
 public class GateCheckEvent {
 	
-	private final DateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS dd-MM-YYYY");
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS dd-MM-YYYY");
 	
 	private final boolean isCheckIn;
 	
 	private final Date timestamp;
+	
+	private final ERailwayStation railwayStation;
 
-	public GateCheckEvent(boolean isCheckIn) {
-		this(isCheckIn, System.currentTimeMillis());
+	public GateCheckEvent(boolean isCheckIn, ERailwayStation railwayStation) {
+		this(isCheckIn, System.currentTimeMillis(), railwayStation);
 	}
 	
-	public GateCheckEvent(boolean isCheckIn, long timestamp) {
+	public GateCheckEvent(boolean isCheckIn, long timestamp, ERailwayStation railwayStation) {
 		this.isCheckIn = isCheckIn;
 		this.timestamp = new Date(timestamp);
+		this.railwayStation = railwayStation;
 	}
 	
 	public boolean isCheckIn() {
@@ -27,6 +30,14 @@ public class GateCheckEvent {
 	
 	public boolean isCheckOut() {
 		return isCheckIn;
+	}
+	
+	public Date getTimestamp() {
+		return timestamp;
+	}
+	
+	public ERailwayStation getRailwayStation() {
+		return railwayStation;
 	}
 	
 	@Override

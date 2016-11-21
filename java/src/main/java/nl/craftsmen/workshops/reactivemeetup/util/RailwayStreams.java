@@ -7,6 +7,9 @@ import nl.craftsmen.workshops.reactivemeetup.domain.railway.RailwayStation;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.Train;
 import rx.Observable;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Map;
@@ -15,6 +18,8 @@ import java.util.concurrent.TimeUnit;
 import static nl.craftsmen.workshops.reactivemeetup.util.Utils.sample;
 
 public class RailwayStreams {
+	
+	private static final DateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm:ss.SSS dd-MM-YYYY");
 	
 	private static Observable<GateCheckEvent> gateCheckEvent$;
 	
@@ -39,8 +44,28 @@ public class RailwayStreams {
 	}
 	
 	private static Observable<GateCheckEvent> singleGateCheckEvent$(boolean isCheckin, long delay) {
-		return Observable.from(Arrays.asList(new GateCheckEvent(isCheckin, System.currentTimeMillis() + delay)))
+		return Observable.from(Arrays.asList(new GateCheckEvent(isCheckin, System.currentTimeMillis() + delay, ERailwayStation.AMR)))
 			.delay(delay, TimeUnit.MILLISECONDS);
+	}
+	
+	public static Observable<GateCheckEvent> personalCheckinsCheckouts$() {
+		return sample(Observable.from(Arrays.asList(
+			new GateCheckEvent(true,  parseDate("08:04:11.345 16-12-2016"), ERailwayStation.UTR),
+			new GateCheckEvent(false, parseDate("08:41:03.409 16-12-2016"), ERailwayStation.AMS),
+			new GateCheckEvent(true,  parseDate("17:44:56.122 16-12-2016"), ERailwayStation.AMS),
+			new GateCheckEvent(false, parseDate("18:49:04.123 16-12-2016"), ERailwayStation.DH),
+			new GateCheckEvent(true,  parseDate("22:15:44.616 16-12-2016"), ERailwayStation.DH),
+			new GateCheckEvent(true,  parseDate("08:03:54.883 17-12-2016"), ERailwayStation.UTR),
+			new GateCheckEvent(false, parseDate("08:39:21.512 17-12-2016"), ERailwayStation.AMS)
+		)), 500);
+	}
+	
+	private static long parseDate(String dateString) {
+		try {
+			return DATE_FORMAT.parse(dateString).getTime();
+		} catch (ParseException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
     private static Map<ERailwayStation, RailwayStation> stations = new MapBuilder<ERailwayStation, RailwayStation>()
