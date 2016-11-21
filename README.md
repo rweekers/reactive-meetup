@@ -10,4 +10,4 @@ The repository contains two directories: a `JS` directory and a `java` directory
 
 ## Javascript
 
-For initializing the javascript environment type `npm install`. The various exercise files (e.g. `exercises/one/exercise-01.js`) can be run with the following command: `npm run dev <path to file>`.
+For initializing the javascript environment type `npm install`. The various exercise files (e.g. `exercises/one/exercise-01.js`) can be run with the following command: `node <path to file>`.
