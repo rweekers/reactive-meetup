@@ -1,6 +1,10 @@
 var Rx = require('rxjs/Rx');
 var sample = require('./utils').sample;
-var Ingredient = require('../domain/ingredient');
+var Ingredient = require('../domain/cooking/ingredient');
+var Circle = require('../domain/geometry/circle');
+var Rectangle = require('../domain/geometry/rectangle');
+var Square = require('../domain/geometry/square');
+var Triangle = require('../domain/geometry/triangle');
 
 const number$ = sample(Rx.Observable.of(1, 9, 4, 7, 6, 2, 2, 7, 3, 4, 8));
 
@@ -10,6 +14,10 @@ exports.numbersWithErrors$ = number$.take(4).concat(Rx.Observable.of(new Error("
 
 exports.word$ = sample(Rx.Observable.of("Jirble:", "spill", "a", "liquid", "by", "shaking", "or", "unsteady",
                 "moving", "of", "the", "vessel"));
+
+exports.shape$ = sample(Rx.Observable.of(new Circle("Circle 30", 30), new Circle("Circle 40", 40), new Square("Square 20", 20),
+                new Rectangle("Rectangle 50x20", 50, 20), new Triangle("Triangle 40x10", 40, 10), new Rectangle("Rectangle 45x40", 45, 40),
+                new Square("Square 30", 30), new Triangle("Triangle 40x45", 40, 45), new Rectangle("Rectangle 10x70", 10, 70)));
 
 exports.ingredient$ = sample(Rx.Observable.of(new Ingredient("Flour", "BASE"),
                 new Ingredient("Sugar", "SWEET"), new Ingredient("Strawberry", "FRUIT"),
