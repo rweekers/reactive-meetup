@@ -22,3 +22,5 @@ exports.shape$ = sample(Rx.Observable.of(new Circle("Circle 30", 30), new Circle
 exports.ingredient$ = sample(Rx.Observable.of(new Ingredient("Flour", "BASE"),
                 new Ingredient("Sugar", "SWEET"), new Ingredient("Strawberry", "FRUIT"),
                 new Ingredient("Salt", "BASE"), new Ingredient("Pineapple", "FRUIT")));
+
+exports.point$ = sample(Rx.Observable.of(0, 3, 0, 3, 1, 3, 0, 0, 3, 0));
