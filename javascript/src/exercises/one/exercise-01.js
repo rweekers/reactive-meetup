@@ -1,4 +1,6 @@
 var Rx = require('rxjs/Rx');
-var streams = require('../../util/example-streams.js');
+var number$ = require('../../util/example-streams.js').number$;
 
-streams.number$.subscribe((x) => console.log(x));
+// ASSIGNMENT: Subscribe to the number$ stream and print each number to the console.
+
+number$.subscribe((x) => console.log(x));
