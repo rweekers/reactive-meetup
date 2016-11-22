@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class TravelExpenseMatrix {
+public class TravelCostMatrix {
 	
 	private final Map<ERailwayStation, Map<ERailwayStation, Double>> costMatrix;
 	
-	public TravelExpenseMatrix(Map<ERailwayStation, Map<ERailwayStation, Double>> costMatrix) {
+	public TravelCostMatrix(Map<ERailwayStation, Map<ERailwayStation, Double>> costMatrix) {
 		this.costMatrix = costMatrix;
 	}
 	
@@ -30,26 +30,31 @@ public class TravelExpenseMatrix {
 		return destinationCosts.get(to);
 	}
 	
-	public static TravelExpenseMatrixBuilder builder() {
-		return new TravelExpenseMatrixBuilder();
+	public static TravelCostMatrixBuilder builder() {
+		return new TravelCostMatrixBuilder();
 	}
 	
-	public static class TravelExpenseMatrixBuilder {
+	public static class TravelCostMatrixBuilder {
 		
 		private final Map<ERailwayStation, Map<ERailwayStation, Double>> costMatrix = new HashMap<>();
 		
-		public TravelExpenseMatrixBuilder define(ERailwayStation a, ERailwayStation b, double cost) {
+		public TravelCostMatrixBuilder define(ERailwayStation a, ERailwayStation b, double cost) {
 			addCostEntry(a, b, cost);
 			addCostEntry(b, a, cost);
 			return this;
 		}
 		
 		private void addCostEntry(ERailwayStation a, ERailwayStation b, double cost) {
-			
+			Map<ERailwayStation, Double> entries = costMatrix.get(a);
+			if (entries == null) {
+				entries = new HashMap<>();
+				costMatrix.put(a, entries);
+			}
+			entries.put(b, cost);
 		}
 		
-		public TravelExpenseMatrix build() {
-			return new TravelExpenseMatrixBuilder();
+		public TravelCostMatrix build() {
+			return new TravelCostMatrix(costMatrix);
 		}
 		
 	}

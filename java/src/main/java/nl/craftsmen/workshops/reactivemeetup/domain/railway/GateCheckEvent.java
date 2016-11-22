@@ -29,7 +29,7 @@ public class GateCheckEvent {
 	}
 	
 	public boolean isCheckOut() {
-		return isCheckIn;
+		return !isCheckIn;
 	}
 	
 	public Date getTimestamp() {
@@ -42,7 +42,7 @@ public class GateCheckEvent {
 	
 	@Override
 	public String toString() {
-		return DATE_FORMAT.format(timestamp) + " - " + (isCheckIn ? "check-in" : "check-out");
+		return DATE_FORMAT.format(timestamp) + " - " + (isCheckIn ? "check-in" : "check-out") + " @ " + railwayStation;
 	}
 	
 }

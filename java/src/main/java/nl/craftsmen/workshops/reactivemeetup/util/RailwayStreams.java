@@ -5,6 +5,7 @@ import nl.craftsmen.workshops.reactivemeetup.domain.railway.ERailwayStation;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.GateCheckEvent;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.RailwayStation;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.Train;
+import nl.craftsmen.workshops.reactivemeetup.domain.railway.TravelCostMatrix;
 import rx.Observable;
 
 import java.text.DateFormat;
@@ -58,6 +59,14 @@ public class RailwayStreams {
 			new GateCheckEvent(true,  parseDate("08:03:54.883 17-12-2016"), ERailwayStation.UTR),
 			new GateCheckEvent(false, parseDate("08:39:21.512 17-12-2016"), ERailwayStation.AMS)
 		)), 500);
+	}
+	
+	public static TravelCostMatrix travelCostMatrix() {
+		return TravelCostMatrix.builder()
+			.define(ERailwayStation.UTR, ERailwayStation.AMS,  7.50)
+			.define(ERailwayStation.UTR, ERailwayStation.DH,  11.00)
+			.define(ERailwayStation.DH,  ERailwayStation.AMS, 11.50)
+			.build();
 	}
 	
 	private static long parseDate(String dateString) {
