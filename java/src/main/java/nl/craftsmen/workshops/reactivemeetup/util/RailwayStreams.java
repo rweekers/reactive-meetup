@@ -3,8 +3,11 @@ package nl.craftsmen.workshops.reactivemeetup.util;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.Departure;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.ERailwayStation;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.GateCheckEvent;
+import nl.craftsmen.workshops.reactivemeetup.domain.railway.RailwayNetwork;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.RailwayStation;
+import nl.craftsmen.workshops.reactivemeetup.domain.railway.RailwaySystemSimulation;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.Train;
+import nl.craftsmen.workshops.reactivemeetup.domain.railway.TrainMetrics;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.TravelCostMatrix;
 import rx.Observable;
 
@@ -67,6 +70,13 @@ public class RailwayStreams {
 			.define(ERailwayStation.UTR, ERailwayStation.DH,  11.00)
 			.define(ERailwayStation.DH,  ERailwayStation.AMS, 11.50)
 			.build();
+	}
+	
+	public static Observable<TrainMetrics> trainMetrics$() {
+		
+		RailwaySystemSimulation railwaySystem = new RailwaySystemSimulation();
+		
+		return railwaySystem.trainMetrics$();
 	}
 	
 	private static long parseDate(String dateString) {
