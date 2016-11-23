@@ -8,17 +8,23 @@ public class RailwaySystemSimulation {
 	
 	private final SerializedSubject<TrainMetrics, TrainMetrics> trainMetricsPublisher;
 
-	public RailwaySystemSimulation() {
+	public RailwaySystemSimulation(RailwayNetwork railwayNetwork) {
 		
 		PublishSubject<TrainMetrics> publisher = PublishSubject.create();
 		trainMetricsPublisher = publisher.toSerialized();
 		
+		publishEvents(1234);
+		publishEvents(677);
+			
+	}
+	
+	private void publishEvents(long interval) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				while (true) {
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(interval);
 					} catch (InterruptedException e) {
 						throw new RuntimeException(e);
 					}
@@ -26,8 +32,7 @@ public class RailwaySystemSimulation {
 				}
 				
 			}
-		});
-		
+		}).start();
 	}
 	
 	public Observable<TrainMetrics> trainMetrics$() {

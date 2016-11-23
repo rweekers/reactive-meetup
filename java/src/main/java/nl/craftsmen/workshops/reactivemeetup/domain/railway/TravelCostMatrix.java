@@ -6,13 +6,13 @@ import java.util.NoSuchElementException;
 
 public class TravelCostMatrix {
 	
-	private final Map<ERailwayStation, Map<ERailwayStation, Double>> costMatrix;
+	private final Map<RailwayStation, Map<RailwayStation, Double>> costMatrix;
 	
-	public TravelCostMatrix(Map<ERailwayStation, Map<ERailwayStation, Double>> costMatrix) {
+	public TravelCostMatrix(Map<RailwayStation, Map<RailwayStation, Double>> costMatrix) {
 		this.costMatrix = costMatrix;
 	}
 	
-	public double getTravelCost(ERailwayStation from, ERailwayStation to) {
+	public double getTravelCost(RailwayStation from, RailwayStation to) {
 		if (from == to) {
 			return 0.0;
 		}
@@ -21,7 +21,7 @@ public class TravelCostMatrix {
 			throw new NoSuchElementException("No entry in travel expense matrix for starting railway station " + from);
 		}
 		
-		 Map<ERailwayStation, Double> destinationCosts = costMatrix.get(from);
+		 Map<RailwayStation, Double> destinationCosts = costMatrix.get(from);
 		
 		if (!destinationCosts.containsKey(to)) {
 			throw new NoSuchElementException("No entry in travel expense matrix for arrival railway station " + to);
@@ -36,16 +36,16 @@ public class TravelCostMatrix {
 	
 	public static class TravelCostMatrixBuilder {
 		
-		private final Map<ERailwayStation, Map<ERailwayStation, Double>> costMatrix = new HashMap<>();
+		private final Map<RailwayStation, Map<RailwayStation, Double>> costMatrix = new HashMap<>();
 		
-		public TravelCostMatrixBuilder define(ERailwayStation a, ERailwayStation b, double cost) {
+		public TravelCostMatrixBuilder define(RailwayStation a, RailwayStation b, double cost) {
 			addCostEntry(a, b, cost);
 			addCostEntry(b, a, cost);
 			return this;
 		}
 		
-		private void addCostEntry(ERailwayStation a, ERailwayStation b, double cost) {
-			Map<ERailwayStation, Double> entries = costMatrix.get(a);
+		private void addCostEntry(RailwayStation a, RailwayStation b, double cost) {
+			Map<RailwayStation, Double> entries = costMatrix.get(a);
 			if (entries == null) {
 				entries = new HashMap<>();
 				costMatrix.put(a, entries);

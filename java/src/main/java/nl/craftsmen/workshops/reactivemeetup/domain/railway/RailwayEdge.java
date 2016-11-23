@@ -2,20 +2,20 @@ package nl.craftsmen.workshops.reactivemeetup.domain.railway;
 
 public class RailwayEdge {
 
-	private final ERailwayStation firstStation;
+	private final RailwayStation firstStation;
 	
-	private final ERailwayStation secondStation;
+	private final RailwayStation secondStation;
 	
-	public RailwayEdge(ERailwayStation firstStation, ERailwayStation secondStation) {
+	public RailwayEdge(RailwayStation firstStation, RailwayStation secondStation) {
 		this.firstStation = firstStation;
 		this.secondStation = secondStation;
 	}
 	
-	public ERailwayStation getFirstStation() {
+	public RailwayStation getFirstStation() {
 		return firstStation;
 	}
 	
-	public ERailwayStation getSecondStation() {
+	public RailwayStation getSecondStation() {
 		return secondStation;
 	}
 	

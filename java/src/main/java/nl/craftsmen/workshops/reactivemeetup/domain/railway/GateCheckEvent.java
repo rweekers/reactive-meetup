@@ -12,13 +12,13 @@ public class GateCheckEvent {
 	
 	private final Date timestamp;
 	
-	private final ERailwayStation railwayStation;
+	private final RailwayStation railwayStation;
 
-	public GateCheckEvent(boolean isCheckIn, ERailwayStation railwayStation) {
+	public GateCheckEvent(boolean isCheckIn, RailwayStation railwayStation) {
 		this(isCheckIn, System.currentTimeMillis(), railwayStation);
 	}
 	
-	public GateCheckEvent(boolean isCheckIn, long timestamp, ERailwayStation railwayStation) {
+	public GateCheckEvent(boolean isCheckIn, long timestamp, RailwayStation railwayStation) {
 		this.isCheckIn = isCheckIn;
 		this.timestamp = new Date(timestamp);
 		this.railwayStation = railwayStation;
@@ -36,7 +36,7 @@ public class GateCheckEvent {
 		return timestamp;
 	}
 	
-	public ERailwayStation getRailwayStation() {
+	public RailwayStation getRailwayStation() {
 		return railwayStation;
 	}
 	
