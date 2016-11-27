@@ -1,5 +1,7 @@
 var Rx = require('rxjs/Rx');
 
+const GATE_OCCUPY_TIME = 1500;
+
 // The point$ stream represents a the number of earned points by a player/team for a number of games.
 var point$ = require('../../util/example-streams.js').point$;
 
@@ -23,5 +25,13 @@ var gateCheckEvent$ = require('../../util/railway-streams.js').gateCheckEvents$;
 // HINT: Solve this assignment using divide and conquer. First try to define two streams, one that tells whenever the
 // gate is occupied and another that tells when the gate is free. Next find a way to combine those streams to get the
 // desired output.
-gateCheckEvent$
-    .subscribe((i) => console.log(i));
+
+var gateIsFree$ = Rx.Observable.merge(
+    gateCheckEvent$.map((x) => false),
+    gateCheckEvent$.debounceTime(GATE_OCCUPY_TIME).map((x) => true))
+    .distinctUntilChanged().startWith(true);
+
+// When implemented correctly you should see the following output:
+// free, occupied, free, occupied, free, occupied, free, occupied, free
+		
+gateIsFree$.subscribe((free) => console.log(free ? "free" : "occupied"));
