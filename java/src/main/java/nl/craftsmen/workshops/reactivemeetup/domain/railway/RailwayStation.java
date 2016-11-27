@@ -6,7 +6,7 @@ public enum RailwayStation {
     DB("DB",   "", new LatLong(51.6905476, 5.2913696)),
     DH("DH",   "Den Haag", new LatLong(52.0809271, 4.3222312)),
     AMR("AMR", "Amersfoort", new LatLong(52.1530195, 5.3711025)),
-    UTR("UTR", "Utrecht Centraal", new LatLong(0.0, 0.0));
+    UTR("UTR", "Utrecht Centraal", new LatLong(52.0893224, 5.1079804));
 
 	private final String id;
 	

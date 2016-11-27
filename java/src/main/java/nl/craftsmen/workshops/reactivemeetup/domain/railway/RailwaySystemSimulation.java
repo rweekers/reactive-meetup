@@ -15,11 +15,10 @@ public class RailwaySystemSimulation {
 		
 		publishEvents(1234);
 		publishEvents(677);
-			
 	}
 	
 	private void publishEvents(long interval) {
-		new Thread(new Runnable() {
+		Thread t = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				while (true) {
@@ -32,7 +31,9 @@ public class RailwaySystemSimulation {
 				}
 				
 			}
-		}).start();
+		});
+		t.setDaemon(true);
+		t.start();
 	}
 	
 	public Observable<TrainMetrics> trainMetrics$() {
