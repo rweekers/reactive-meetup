@@ -6,14 +6,6 @@ module.exports = class GateCheckEvent {
         this.railwayStation = railwayStation;
     }
 	
-	isCheckIn() {
-		return isCheckIn;
-	}
-	
-	isCheckOut() {
-		return !isCheckIn;
-	}
-	
 	getTimestamp() {
 		return timestamp;
 	}
