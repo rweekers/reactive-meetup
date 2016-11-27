@@ -1,5 +1,6 @@
 var Rx = require('rxjs/Rx');
 var sample = require('./utils').sample;
+var TravelCostMatrix = require('../domain/railway/travel-cost-matrix');
 var GateCheckEvent = require('../domain/railway/gate-check-event');
 
 let gte;
@@ -15,6 +16,8 @@ exports.personalCheckinsCheckouts$ = sample(Rx.Observable.of(
 	new GateCheckEvent(true,  new Date(2016, 12, 17, 8, 3, 54, 883), 'UTR'),
 	new GateCheckEvent(false, new Date(2016, 12, 17, 8, 39, 21, 512), 'AMS')
 ));
+
+exports.travelCostMatrix = getTravelCostMatrix();
 
 function gateCheckEvent$() {
     if (gte == null) {
@@ -37,4 +40,12 @@ function gateCheckEvent$() {
 function singleGateCheckEvent$(isCheckin, delay) {
     return Rx.Observable.of(new GateCheckEvent(isCheckin, Date.now() + delay, 'AMR'))
         .delay(delay);
+}
+
+function getTravelCostMatrix() {
+    const travelCosts = new TravelCostMatrix();
+    travelCosts.addCostEntry('UTR', 'AMS', 7.50);
+    travelCosts.addCostEntry('UTR', 'DH', 11.00);
+    travelCosts.addCostEntry('DH', 'AMS', 11.50);
+    return travelCosts;
 }

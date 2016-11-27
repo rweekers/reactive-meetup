@@ -10,6 +10,8 @@ const NO_CHECKOUT_COST = 20.0;
 
 var personalCheckinsCheckouts$ = require('../../util/railway-streams.js').personalCheckinsCheckouts$;
 
+var costMatrix = require('../../util/railway-streams.js').travelCostMatrix;
+
 // ASSIGNMENT: Given the gateCheckEvent$ of check-in and check-out events compute the cumulative travel cost. The resulting stream
 // should emit the total travel cost for every new journey.
 //
@@ -23,7 +25,7 @@ var personalCheckinsCheckouts$ = require('../../util/railway-streams.js').person
 var travelCost$ = Rx.Observable.zip(personalCheckinsCheckouts$, personalCheckinsCheckouts$.skip(1), 
     (a, b) => {
         if (a.isCheckIn && b.isCheckOut) {
-            return 30.0
+            return costMatrix.getTravelCost(a, b)
         } else if (a.isCheckIn && b.isCheckIn) {
             return NO_CHECKOUT_COST
         }
@@ -36,6 +38,3 @@ var travelCost$ = Rx.Observable.zip(personalCheckinsCheckouts$, personalCheckins
 // 7.5, 19.0, 39.0, 46.5
 		
 travelCost$.subscribe(console.log);
-
-// .subscribe((i) => console.log(i));
-
