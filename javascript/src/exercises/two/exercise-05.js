@@ -2,9 +2,6 @@ var Rx = require('rxjs/Rx');
 
 const GATE_OCCUPY_TIME = 1500;
 
-// The point$ stream represents a the number of earned points by a player/team for a number of games.
-var point$ = require('../../util/example-streams.js').point$;
-
 // With the introduction of the "OV chipkaart" in the Netherlands, every person that wishes to travel by train needs to
 // check in and check out with their "OV chipkaart". Many railway stations have adopted gates which (in the future) can
 // only be opened by either checking in or checking out. The gateCheckEvent$ stream below represents the checkins and 
