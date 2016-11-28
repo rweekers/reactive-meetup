@@ -2,7 +2,8 @@ package nl.craftsmen.workshops.reactivemeetup.util;
 
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.RailwayStation;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.GateCheckEvent;
-import nl.craftsmen.workshops.reactivemeetup.domain.railway.RailwaySystemSimulation;
+import nl.craftsmen.workshops.reactivemeetup.domain.railway.TrainJourneySimulation;
+import nl.craftsmen.workshops.reactivemeetup.domain.railway.TrainJourneySimulationParameters;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.TrainMetrics;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.TravelCostMatrix;
 
@@ -37,35 +38,43 @@ public class RailwayStreams {
 	}
 
 	private static Observable<GateCheckEvent> singleGateCheckEvent$(boolean isCheckin, long delay) {
-		return Observable
-				.from(Arrays
-						.asList(new GateCheckEvent(isCheckin, System.currentTimeMillis() + delay, RailwayStation.AMR)))
-				.delay(delay, TimeUnit.MILLISECONDS);
+		return Observable.from(Arrays.asList(
+			new GateCheckEvent(isCheckin, System.currentTimeMillis() + delay, RailwayStation.AMR))
+		).delay(delay, TimeUnit.MILLISECONDS);
 	}
 
 	public static Observable<GateCheckEvent> personalCheckinsCheckouts$() {
-		return sample(Observable
-				.from(Arrays.asList(new GateCheckEvent(true, parseDate("08:04:11.345 16-12-2016"), RailwayStation.UTR),
-						new GateCheckEvent(false, parseDate("08:41:03.409 16-12-2016"), RailwayStation.AMS),
-						new GateCheckEvent(true, parseDate("17:44:56.122 16-12-2016"), RailwayStation.AMS),
-						new GateCheckEvent(false, parseDate("18:49:04.123 16-12-2016"), RailwayStation.DH),
-						new GateCheckEvent(true, parseDate("22:15:44.616 16-12-2016"), RailwayStation.DH),
-						new GateCheckEvent(true, parseDate("08:03:54.883 17-12-2016"), RailwayStation.UTR),
-						new GateCheckEvent(false, parseDate("08:39:21.512 17-12-2016"), RailwayStation.AMS))),
-				500);
+		return sample(Observable.from(Arrays.asList(
+			new GateCheckEvent(true, parseDate("08:04:11.345 16-12-2016"), RailwayStation.UTR),
+			new GateCheckEvent(false, parseDate("08:41:03.409 16-12-2016"), RailwayStation.AMS),
+			new GateCheckEvent(true, parseDate("17:44:56.122 16-12-2016"), RailwayStation.AMS),
+			new GateCheckEvent(false, parseDate("18:49:04.123 16-12-2016"), RailwayStation.DH),
+			new GateCheckEvent(true, parseDate("22:15:44.616 16-12-2016"), RailwayStation.DH),
+			new GateCheckEvent(true, parseDate("08:03:54.883 17-12-2016"), RailwayStation.UTR),
+			new GateCheckEvent(false, parseDate("08:39:21.512 17-12-2016"), RailwayStation.AMS))),
+		500);
 	}
 
 	public static TravelCostMatrix travelCostMatrix() {
 		return TravelCostMatrix.builder().define(RailwayStation.UTR, RailwayStation.AMS, 7.50)
-				.define(RailwayStation.UTR, RailwayStation.DH, 11.00)
-				.define(RailwayStation.DH, RailwayStation.AMS, 11.50).build();
+			.define(RailwayStation.UTR, RailwayStation.DH, 11.00)
+			.define(RailwayStation.DH, RailwayStation.AMS, 11.50).build();
 	}
 
 	public static Observable<TrainMetrics> trainMetrics$() {
 
-		RailwaySystemSimulation railwaySystem = new RailwaySystemSimulation(null);
+		TrainJourneySimulation simultation = new TrainJourneySimulation(
+			new TrainJourneySimulationParameters()
+				.setStart(RailwayStation.AMR)
+				.setDestination(RailwayStation.UTR)
+				.setTickFrequency(10)
+				.setMaxVelocity(140 / 3.6)
+				.setAcceleration(2 / 3.6)
+				.setTrainId("1042")
+				.setTimeDelation(10.0)
+		);
 
-		return railwaySystem.trainMetrics$();
+		return simultation.trainMetrics$();
 	}
 
 	private static long parseDate(String dateString) {

@@ -2,64 +2,81 @@ package nl.craftsmen.workshops.reactivemeetup.domain.railway;
 
 public class TrainJourneySimulationParameters {
 	
-	private final String trainId;
+	private String trainId;
 	
-	private final RailwayStation start;
+	private RailwayStation start;
 	
-	private final RailwayStation destination;
+	private RailwayStation destination;
 	
-	private final double maxSpeed;
+	private double maxVelocity;
 	
-	private final double acceleration;
+	private double acceleration;
 	
-	private final double timeDelation;
+	private double timeDelation;
 	
-	private final int tickFrequency;
-	
-	public TrainJourneySimulationParameters(
-		String trainId,
-		RailwayStation start,
-		RailwayStation destination,
-		double maxSpeed,
-		double acceleration,
-		double timeDelation,
-		int tickFrequency
-	) {
-		this.trainId = trainId;
-		this.start = start;
-		this.destination = destination;
-		this.maxSpeed = maxSpeed;
-		this.acceleration = acceleration;
-		this.timeDelation = timeDelation;
-		this.tickFrequency = tickFrequency;
-	}
-	
+	private int tickFrequency;
+
 	public String getTrainId() {
 		return trainId;
 	}
-	
+
+	public TrainJourneySimulationParameters setTrainId(String trainId) {
+		this.trainId = trainId;
+		return this;
+	}
+
 	public RailwayStation getStart() {
 		return start;
 	}
-	
+
+	public TrainJourneySimulationParameters setStart(RailwayStation start) {
+		this.start = start;
+		return this;
+	}
+
 	public RailwayStation getDestination() {
 		return destination;
 	}
-	
-	public double getMaxSpeed() {
-		return maxSpeed;
+
+	public TrainJourneySimulationParameters setDestination(RailwayStation destination) {
+		this.destination = destination;
+		return this;
 	}
-	
+
+	public double getMaxVelocity() {
+		return maxVelocity;
+	}
+
+	public TrainJourneySimulationParameters setMaxVelocity(double maxVelocity) {
+		this.maxVelocity = maxVelocity;
+		return this;
+	}
+
 	public double getAcceleration() {
 		return acceleration;
 	}
-	
+
+	public TrainJourneySimulationParameters setAcceleration(double acceleration) {
+		this.acceleration = acceleration;
+		return this;
+	}
+
 	public double getTimeDelation() {
 		return timeDelation;
 	}
-	
+
+	public TrainJourneySimulationParameters setTimeDelation(double timeDelation) {
+		this.timeDelation = timeDelation;
+		return this;
+	}
+
 	public int getTickFrequency() {
 		return tickFrequency;
 	}
-	
+
+	public TrainJourneySimulationParameters setTickFrequency(int tickFrequency) {
+		this.tickFrequency = tickFrequency;
+		return this;
+	}
+		
 }
