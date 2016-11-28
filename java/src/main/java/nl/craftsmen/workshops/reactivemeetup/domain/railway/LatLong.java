@@ -53,6 +53,30 @@ public class LatLong {
 		
 		return EARTH_RADIUS * c;		
 	}
+	
+	/**
+	 * Computes the latitude/longitude coordinate that lies at the specified offset of the linear interpolation between the given coordinate
+	 * and the coordinate on which this method is called. The offset is expected to be normalised, where an offset of 0.0 is equal to the
+	 * coordinate in which this method is called and where an offset of 1.0 is equal to the other coordinate.
+	 *  
+	 * @param  other  Other (reference) geographical coordinate which is used for specifying the linear interpolation slope.
+	 * @param  offset Normalised interpolation offset.
+	 * @return        The interpolated latitude/longitude coordinate.
+	 */
+	public LatLong interpolate(LatLong other, double offset) {
+		return new LatLong(
+			this.latitude * (1 - offset) + other.latitude * offset,
+			this.longitude * (1 - offset) + other.longitude * offset
+		);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return "(" + latitude + ", " + longitude + ")";
+	}
 		
 	private static double toRadians(double degrees) {
 		return degrees * PI / 180;

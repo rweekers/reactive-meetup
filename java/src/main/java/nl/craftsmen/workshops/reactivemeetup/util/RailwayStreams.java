@@ -63,18 +63,18 @@ public class RailwayStreams {
 
 	public static Observable<TrainMetrics> trainMetrics$() {
 
-		TrainJourneySimulation simultation = new TrainJourneySimulation(
+		TrainJourneySimulation simulation = new TrainJourneySimulation(
 			new TrainJourneySimulationParameters()
 				.setStart(RailwayStation.AMR)
 				.setDestination(RailwayStation.UTR)
-				.setTickFrequency(10)
+				.setTickFrequency(60)
 				.setMaxVelocity(140 / 3.6)
 				.setAcceleration(2 / 3.6)
 				.setTrainId("1042")
-				.setTimeDelation(50.0)
+				.setTimeDilation(50.0)
 		);
 
-		return simultation.trainMetrics$();
+		return simulation.trainMetrics$();
 	}
 
 	private static long parseDate(String dateString) {

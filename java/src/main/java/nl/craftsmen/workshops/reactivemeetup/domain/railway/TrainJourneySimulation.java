@@ -58,39 +58,51 @@ public class TrainJourneySimulation {
 			
 			long startTime = System.currentTimeMillis();
 			
-			loop(parameters.getTickFrequency(), () -> {
+			try {
 				
-				double elapsedTime = (System.currentTimeMillis() - startTime) / 1000.0 * parameters.getTimeDelation();
+				loop(parameters.getTickFrequency(), () -> {
+					
+					double elapsedTime = (System.currentTimeMillis() - startTime) / 1000.0 * parameters.getTimeDilation();
+					
+					double distance;
+					if (elapsedTime < accelerationTime) {
+						distance = 0.5 * parameters.getAcceleration() * elapsedTime * elapsedTime;
+					} else if (elapsedTime < unacceleratedTime + accelerationTime) {
+						distance = accelerationDistance + parameters.getMaxVelocity() * (elapsedTime - accelerationTime);
+					} else {
+						double t = Math.min(accelerationTime, elapsedTime - accelerationTime - unacceleratedTime);
+						distance = Math.min(totalDistance, accelerationDistance + unacceleratedDistance +
+							parameters.getMaxVelocity() * t - 0.5 * parameters.getAcceleration() * t * t);
+					}
+					
+					double normalizedDistance = distance / totalDistance;
+					
+					LatLong currentPosition = startPosition.interpolate(destinationPosition, normalizedDistance);
+					
+					publisher.onNext(new TrainMetrics(parameters.getTrainId(), startTime + (long)(elapsedTime * 1000), currentPosition));
+					
+					return elapsedTime < totalTime;
+				});
 				
-				double distance;
-				if (elapsedTime < accelerationTime) {
-					distance = 0.5 * parameters.getAcceleration() * elapsedTime * elapsedTime;
-					System.out.println("accelerating -> s = " + distance + " / " + totalDistance);
-				} else if (elapsedTime < unacceleratedTime + accelerationTime) {
-					distance = accelerationDistance + parameters.getMaxVelocity() * (elapsedTime - accelerationTime);
-					System.out.println("steady -> s = " + distance + " / " + totalDistance);
-				} else {
-					double t = elapsedTime - accelerationTime - unacceleratedTime;
-					distance = Math.max(totalDistance, accelerationDistance + unacceleratedDistance + 0.5 * parameters.getAcceleration() * t * t);
-					System.out.println("decelerating -> s = " + distance + " / " + totalDistance);
-				}
+				publisher.onCompleted();
 				
-				return elapsedTime < totalTime;
-			});
+			} catch (Exception e) {
+				
+				publisher.onError(e);
+				
+			}
 			
-			publisher.onNext(null);
-			publisher.onCompleted();
 		}
 		
-		private static void loop(int frequency, Callable<Boolean> action) {
-			long tickDelay = (long)(1000.0 / frequency + 0.5);
+		private static void loop(int frequency, Callable<Boolean> action) throws Exception {
+			double tickDelay = 1000.0 / frequency;
 			
 			boolean shouldContinue = true;
 			try {
-				long startTime = System.currentTimeMillis();
+				long startTime = System.currentTimeMillis() - (long)(tickDelay + 0.5);
 				while (shouldContinue) {
 					long elapsedTime = System.currentTimeMillis() - startTime;
-					long sleepTime = Math.max(0, tickDelay - elapsedTime);
+					long sleepTime = Math.max(0, (long)(2 * tickDelay - elapsedTime + 0.5));
 					
 					startTime = System.currentTimeMillis();
 					
@@ -100,8 +112,6 @@ public class TrainJourneySimulation {
 				}
 			} catch (InterruptedException e) {
 				// Interrupted. Silently quit loop.
-			} catch (Exception e) {
-				throw new RuntimeException(e);
 			}
 		}
 	}

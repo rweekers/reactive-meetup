@@ -12,7 +12,7 @@ public class TrainJourneySimulationParameters {
 	
 	private double acceleration;
 	
-	private double timeDelation;
+	private double timeDilation;
 	
 	private int tickFrequency;
 
@@ -61,12 +61,12 @@ public class TrainJourneySimulationParameters {
 		return this;
 	}
 
-	public double getTimeDelation() {
-		return timeDelation;
+	public double getTimeDilation() {
+		return timeDilation;
 	}
 
-	public TrainJourneySimulationParameters setTimeDelation(double timeDelation) {
-		this.timeDelation = timeDelation;
+	public TrainJourneySimulationParameters setTimeDilation(double timeDilation) {
+		this.timeDilation = timeDilation;
 		return this;
 	}
 
