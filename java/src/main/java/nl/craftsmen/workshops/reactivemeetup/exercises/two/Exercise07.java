@@ -13,7 +13,7 @@ public class Exercise07 {
 		
 		Observable<TrainMetrics> trainMetrics$ = RailwayStreams.trainMetrics$();
 		
-		trainMetrics$.subscribe(System.out::println);
+		//trainMetrics$.subscribe(System.out::println);
 		
 		waitForStreamToComplete(trainMetrics$);
 	}

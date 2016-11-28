@@ -71,7 +71,7 @@ public class RailwayStreams {
 				.setMaxVelocity(140 / 3.6)
 				.setAcceleration(2 / 3.6)
 				.setTrainId("1042")
-				.setTimeDelation(10.0)
+				.setTimeDelation(50.0)
 		);
 
 		return simultation.trainMetrics$();

@@ -47,14 +47,38 @@ public class TrainJourneySimulation {
 			double totalDistance = startPosition.distanceTo(destinationPosition);
 			
 			double accelerationTime = parameters.getMaxVelocity() / parameters.getAcceleration();
+			double accelerationDistance = 0.5 * parameters.getAcceleration() * accelerationTime * accelerationTime;
+			
+			// TODO adjust acceleration time and distance when unable to achieve max velocity for short distances.
+			
+			double unacceleratedDistance = totalDistance - 2 * accelerationDistance;
+			double unacceleratedTime = unacceleratedDistance / parameters.getMaxVelocity();
+			
+			double totalTime = 2 * accelerationTime + unacceleratedTime;
+			
+			long startTime = System.currentTimeMillis();
 			
 			loop(parameters.getTickFrequency(), () -> {
 				
-				System.out.println("tick -> totalDistance = " + totalDistance);
+				double elapsedTime = (System.currentTimeMillis() - startTime) / 1000.0 * parameters.getTimeDelation();
 				
-				return true;
+				double distance;
+				if (elapsedTime < accelerationTime) {
+					distance = 0.5 * parameters.getAcceleration() * elapsedTime * elapsedTime;
+					System.out.println("accelerating -> s = " + distance + " / " + totalDistance);
+				} else if (elapsedTime < unacceleratedTime + accelerationTime) {
+					distance = accelerationDistance + parameters.getMaxVelocity() * (elapsedTime - accelerationTime);
+					System.out.println("steady -> s = " + distance + " / " + totalDistance);
+				} else {
+					double t = elapsedTime - accelerationTime - unacceleratedTime;
+					distance = Math.max(totalDistance, accelerationDistance + unacceleratedDistance + 0.5 * parameters.getAcceleration() * t * t);
+					System.out.println("decelerating -> s = " + distance + " / " + totalDistance);
+				}
+				
+				return elapsedTime < totalTime;
 			});
 			
+			publisher.onNext(null);
 			publisher.onCompleted();
 		}
 		
