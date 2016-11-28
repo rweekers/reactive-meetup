@@ -4,6 +4,7 @@ import static nl.craftsmen.workshops.reactivemeetup.util.Utils.waitForStreamToCo
 
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.TrainMetrics;
 import nl.craftsmen.workshops.reactivemeetup.util.RailwayStreams;
+
 import rx.Observable;
 
 public class Exercise07 {
