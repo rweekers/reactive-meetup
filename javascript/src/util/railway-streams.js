@@ -8,9 +8,9 @@ let gte;
 exports.gateCheckEvents$ = gateCheckEvent$();
 
 exports.personalCheckinsCheckouts$ = sample(Rx.Observable.of(
-    new GateCheckEvent(true, new Date(2016, 12, 16, 8, 4, 11, 345), 'UTR'), //08:04:11.345 16-12-2016"
+    new GateCheckEvent(true, new Date(2016, 12, 16, 8, 4, 11, 345), 'UTR'),
     new GateCheckEvent(false,new Date(2016, 12, 16, 8, 41, 3, 409), 'AMS'),
-	new GateCheckEvent(true,  new Date(2016, 12, 16, 17, 44, 56, 122), ''),
+	new GateCheckEvent(true,  new Date(2016, 12, 16, 17, 44, 56, 122), 'AMS'),
 	new GateCheckEvent(false, new Date(2016, 12, 16, 18, 49, 4, 123), 'DH'),
 	new GateCheckEvent(true,  new Date(2016, 12, 16, 22, 15, 44, 616), 'DH'),
 	new GateCheckEvent(true,  new Date(2016, 12, 17, 8, 3, 54, 883), 'UTR'),

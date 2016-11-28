@@ -24,9 +24,9 @@ var costMatrix = require('../../util/railway-streams.js').travelCostMatrix;
 
 var travelCost$ = Rx.Observable.zip(personalCheckinsCheckouts$, personalCheckinsCheckouts$.skip(1), 
     (a, b) => {
-        if (a.isCheckIn && b.isCheckOut) {
-            return costMatrix.getTravelCost(a, b)
-        } else if (a.isCheckIn && b.isCheckIn) {
+        if (a.isCheckIn() && b.isCheckOut()) {
+            return costMatrix.getTravelCost(a.getRailwayStation(), b.getRailwayStation())
+        } else if (a.isCheckIn() && b.isCheckIn()) {
             return NO_CHECKOUT_COST
         }
         return 0.0;
