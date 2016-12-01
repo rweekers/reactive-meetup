@@ -4,18 +4,19 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 
-public class TrainJourneySimulation {
+public class TrainJourneySimulation implements TrainSimulation {
 	
-	private final TrainJourneySimulationParameters parameters;
+	private final LatLong startPosition;
 	
-	public TrainJourneySimulation(TrainJourneySimulationParameters simulationParameters) {
-		this.parameters = simulationParameters;
+	private final LatLong destinationPosition;
+	
+	public TrainJourneySimulation(LatLong startPosition, LatLong destinationPosition) {
+		this.startPosition = startPosition;
+		this.destinationPosition = destinationPosition;
 	}
 	
-	public Observable<TrainMetrics> trainMetrics$() {
+	public Observable<TrainMetrics> trainMetrics$(TrainSimulationParameters parameters, long startTime) {
 		
-		LatLong startPosition = parameters.getStart();
-		LatLong destinationPosition = parameters.getDestination();
 		double totalDistance = startPosition.distanceTo(destinationPosition);
 		
 		double accelerationTime = parameters.getMaxVelocity() / parameters.getAcceleration();
@@ -27,8 +28,6 @@ public class TrainJourneySimulation {
 		double unacceleratedTime = unacceleratedDistance / parameters.getMaxVelocity();
 		
 		double totalTime = 2 * accelerationTime + unacceleratedTime;
-		
-		long startTime = System.currentTimeMillis();
 		
 		double tickDelay = 1000.0 / parameters.getTickFrequency();
 		

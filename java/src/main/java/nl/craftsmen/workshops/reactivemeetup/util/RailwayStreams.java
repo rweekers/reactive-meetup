@@ -1,10 +1,13 @@
 package nl.craftsmen.workshops.reactivemeetup.util;
 
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.RailwayStation;
+import nl.craftsmen.workshops.reactivemeetup.domain.railway.StationaryTrainSimulation;
+import nl.craftsmen.workshops.reactivemeetup.domain.railway.CompositeTrainSimulation;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.GateCheckEvent;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.TrainJourneySimulation;
-import nl.craftsmen.workshops.reactivemeetup.domain.railway.TrainJourneySimulationParameters;
+import nl.craftsmen.workshops.reactivemeetup.domain.railway.TrainSimulationParameters;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.TrainMetrics;
+import nl.craftsmen.workshops.reactivemeetup.domain.railway.TrainSimulation;
 import nl.craftsmen.workshops.reactivemeetup.domain.railway.TravelCostMatrix;
 
 import rx.Observable;
@@ -26,12 +29,18 @@ public class RailwayStreams {
 	public static Observable<GateCheckEvent> gateCheckEvent$() {
 
 		if (gateCheckEvent$ == null) {
-			gateCheckEvent$ = Observable
-					.merge(Arrays.asList(singleGateCheckEvent$(true, 233), singleGateCheckEvent$(true, 978),
-							singleGateCheckEvent$(false, 1313), singleGateCheckEvent$(true, 2105),
-							singleGateCheckEvent$(false, 3643), singleGateCheckEvent$(false, 4411),
-							singleGateCheckEvent$(true, 5556), singleGateCheckEvent$(false, 8123),
-							singleGateCheckEvent$(false, 9722), singleGateCheckEvent$(true, 10880)));
+			gateCheckEvent$ = Observable.merge(Arrays.asList(
+				singleGateCheckEvent$(true, 233),
+				singleGateCheckEvent$(true, 978),
+				singleGateCheckEvent$(false, 1313),
+				singleGateCheckEvent$(true, 2105),
+				singleGateCheckEvent$(false, 3643),
+				singleGateCheckEvent$(false, 4411),
+				singleGateCheckEvent$(true, 5556),
+				singleGateCheckEvent$(false, 8123),
+				singleGateCheckEvent$(false, 9722),
+				singleGateCheckEvent$(true, 10880)
+			));
 		}
 
 		return gateCheckEvent$;
@@ -56,25 +65,29 @@ public class RailwayStreams {
 	}
 
 	public static TravelCostMatrix travelCostMatrix() {
-		return TravelCostMatrix.builder().define(RailwayStation.UTR, RailwayStation.AMS, 7.50)
+		return TravelCostMatrix.builder()
+			.define(RailwayStation.UTR, RailwayStation.AMS, 7.50)
 			.define(RailwayStation.UTR, RailwayStation.DH, 11.00)
-			.define(RailwayStation.DH, RailwayStation.AMS, 11.50).build();
+			.define(RailwayStation.DH, RailwayStation.AMS, 11.50)
+			.build();
 	}
 
 	public static Observable<TrainMetrics> trainMetrics$() {
 
-		TrainJourneySimulation simulation = new TrainJourneySimulation(
-			new TrainJourneySimulationParameters()
-				.setStart(RailwayStation.AMR.getLocation())
-				.setDestination(RailwayStation.UTR.getLocation())
-				.setTickFrequency(100)
-				.setMaxVelocity(140 / 3.6)
-				.setAcceleration(2 / 3.6)
-				.setTrainId("1042")
-				.setTimeDilation(40.0)
-		);
+		TrainSimulationParameters simulationParameters = new TrainSimulationParameters()
+			.setTickFrequency(100)
+			.setMaxVelocity(140 / 3.6)
+			.setAcceleration(2 / 3.6)
+			.setTrainId("1042")
+			.setTimeDilation(40.0);
 
-		return simulation.trainMetrics$();
+		TrainSimulation simulation = new CompositeTrainSimulation(
+			new StationaryTrainSimulation(RailwayStation.AMR.getLocation(), 60.0),
+			new TrainJourneySimulation(RailwayStation.AMR.getLocation(), RailwayStation.UTR.getLocation()),
+			new StationaryTrainSimulation(RailwayStation.UTR.getLocation(), 60.0)
+		);
+		
+		return simulation.trainMetrics$(simulationParameters, System.currentTimeMillis());
 	}
 
 	private static long parseDate(String dateString) {
