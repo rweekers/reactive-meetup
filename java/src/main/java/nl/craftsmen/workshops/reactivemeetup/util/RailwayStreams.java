@@ -67,11 +67,11 @@ public class RailwayStreams {
 			new TrainJourneySimulationParameters()
 				.setStart(RailwayStation.AMR.getLocation())
 				.setDestination(RailwayStation.UTR.getLocation())
-				.setTickFrequency(60)
+				.setTickFrequency(100)
 				.setMaxVelocity(140 / 3.6)
 				.setAcceleration(2 / 3.6)
 				.setTrainId("1042")
-				.setTimeDilation(50.0)
+				.setTimeDilation(40.0)
 		);
 
 		return simulation.trainMetrics$();

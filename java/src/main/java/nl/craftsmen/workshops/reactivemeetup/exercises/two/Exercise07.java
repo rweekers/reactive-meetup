@@ -14,7 +14,7 @@ public class Exercise07 {
 		Observable<TrainMetrics> trainMetrics$ = RailwayStreams.trainMetrics$();
 		
 		Observable<Double> averageVelocity$ = trainMetrics$
-			.buffer(2, 1)
+			.buffer(10, 5)
 			.filter((measurements) -> measurements.size() > 1)
 			.map((measurements) -> {
 				TrainMetrics first = measurements.get(0);
