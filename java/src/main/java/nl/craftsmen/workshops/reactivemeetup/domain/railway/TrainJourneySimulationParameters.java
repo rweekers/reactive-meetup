@@ -4,9 +4,9 @@ public class TrainJourneySimulationParameters {
 	
 	private String trainId;
 	
-	private RailwayStation start;
+	private LatLong start;
 	
-	private RailwayStation destination;
+	private LatLong destination;
 	
 	private double maxVelocity;
 	
@@ -25,20 +25,20 @@ public class TrainJourneySimulationParameters {
 		return this;
 	}
 
-	public RailwayStation getStart() {
+	public LatLong getStart() {
 		return start;
 	}
 
-	public TrainJourneySimulationParameters setStart(RailwayStation start) {
+	public TrainJourneySimulationParameters setStart(LatLong start) {
 		this.start = start;
 		return this;
 	}
 
-	public RailwayStation getDestination() {
+	public LatLong getDestination() {
 		return destination;
 	}
 
-	public TrainJourneySimulationParameters setDestination(RailwayStation destination) {
+	public TrainJourneySimulationParameters setDestination(LatLong destination) {
 		this.destination = destination;
 		return this;
 	}

@@ -14,8 +14,8 @@ public class TrainJourneySimulation {
 	
 	public Observable<TrainMetrics> trainMetrics$() {
 		
-		LatLong startPosition = parameters.getStart().getLocation();
-		LatLong destinationPosition = parameters.getDestination().getLocation();
+		LatLong startPosition = parameters.getStart();
+		LatLong destinationPosition = parameters.getDestination();
 		double totalDistance = startPosition.distanceTo(destinationPosition);
 		
 		double accelerationTime = parameters.getMaxVelocity() / parameters.getAcceleration();
@@ -32,7 +32,7 @@ public class TrainJourneySimulation {
 		
 		double tickDelay = 1000.0 / parameters.getTickFrequency();
 		
-		int requiredNumberOfFrames = (int) Math.ceil(totalTime * 1000 / (tickDelay * parameters.getTimeDilation()));
+		int requiredNumberOfFrames = (int) Math.ceil(totalTime * 1000 / (tickDelay * parameters.getTimeDilation())) + 1;
 		
 		return Observable.interval((long) Math.round(tickDelay), TimeUnit.MILLISECONDS)
 			.take(requiredNumberOfFrames)

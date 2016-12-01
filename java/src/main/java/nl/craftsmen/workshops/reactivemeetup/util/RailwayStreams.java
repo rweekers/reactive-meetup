@@ -65,8 +65,8 @@ public class RailwayStreams {
 
 		TrainJourneySimulation simulation = new TrainJourneySimulation(
 			new TrainJourneySimulationParameters()
-				.setStart(RailwayStation.AMR)
-				.setDestination(RailwayStation.UTR)
+				.setStart(RailwayStation.AMR.getLocation())
+				.setDestination(RailwayStation.UTR.getLocation())
 				.setTickFrequency(60)
 				.setMaxVelocity(140 / 3.6)
 				.setAcceleration(2 / 3.6)

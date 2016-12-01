@@ -13,9 +13,22 @@ public class Exercise07 {
 		
 		Observable<TrainMetrics> trainMetrics$ = RailwayStreams.trainMetrics$();
 		
-		trainMetrics$.subscribe(System.out::println);
+		Observable<Double> averageVelocity$ = trainMetrics$
+			.buffer(2, 1)
+			.filter((measurements) -> measurements.size() > 1)
+			.map((measurements) -> {
+				TrainMetrics first = measurements.get(0);
+				TrainMetrics last = measurements.get(measurements.size() - 1);
+				long elapsedTime = last.getTimestamp() - first.getTimestamp();
+				double distance = last.getPosition().distanceTo(first.getPosition());
+				double velocity = distance * 1000 / elapsedTime;
+				return velocity;
+			})
+			.map((velocity) -> velocity * 3.6);
 		
-		waitForStreamToComplete(trainMetrics$);
+		averageVelocity$.subscribe(System.out::println);
+		
+		waitForStreamToComplete(averageVelocity$);
 	}
 	
 }
