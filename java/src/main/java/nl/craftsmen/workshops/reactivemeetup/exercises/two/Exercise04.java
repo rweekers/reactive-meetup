@@ -25,7 +25,7 @@ public class Exercise04 {
 			.map((velocities) -> velocities.get(1) - velocities.get(0))
 			.zipWith(velocity$.skip(1), (acceleration, velocity) -> {
 				if (Math.abs(acceleration) < 0.1) {
-					return velocity < 0.1 ? MotionType.STATIONARY : MotionType.MOVING_STEADY;
+					return velocity < 0.1 ? MotionType.STATIONARY : MotionType.CONSTANT_SPEED;
 				}
 				return acceleration < 0 ? MotionType.DECELERATING : MotionType.ACCELERATING;
 			})

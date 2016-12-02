@@ -8,7 +8,7 @@ var TrainJourneySimulation = require('../domain/railway/train-journey-simulation
 var CompositeTrainSimulation = require('../domain/railway/composite-train-simulation');
 var RailwayStation = require('../domain/railway/railway-station');
 
-let gte;
+let gce;
 
 exports.gateCheckEvents$ = gateCheckEvent$();
 
@@ -27,7 +27,7 @@ exports.travelCostMatrix = getTravelCostMatrix();
 exports.trainMetrics$ =  getTrainMetrics$();
 
 function getTrainMetrics$() {
-    simulationParameters = new TrainSimulationParameters(100, 140 / 3.6, 2 / 3.6, "1042", 40.0);
+    simulationParameters = new TrainSimulationParameters(100, 140 / 3.6, 2 / 3.6, '1042', 40.0);
 
     simulation = new CompositeTrainSimulation(
         new StationaryTrainSimulation(RailwayStation.AMR.location, 60.0),
@@ -38,9 +38,21 @@ function getTrainMetrics$() {
     return simulation.trainMetrics$(simulationParameters, Date.now());
 }
 
+exports.velocity$ = getTrainMetrics$()
+    .bufferCount(10, 5)
+    .filter((measurement) => measurement.length > 1)
+    .map(([first, ...rest]) => {
+        const last = rest[rest.length-1];
+        const elapsedTime = last.getTimestamp() - first.getTimestamp();
+        const distance = last.getPosition().distanceTo(first.getPosition());
+        const velocity = distance * 1000 / elapsedTime;
+        return velocity;
+    })
+    .map((velocity) => velocity * 3.6);
+
 function gateCheckEvent$() {
-    if (gte == null) {
-        gte = Rx.Observable.merge(
+    if (gce == null) {
+        gce = Rx.Observable.merge(
             singleGateCheckEvent$(true, 233), 
             singleGateCheckEvent$(true, 978),
             singleGateCheckEvent$(false,  1313),
@@ -53,7 +65,7 @@ function gateCheckEvent$() {
 			singleGateCheckEvent$(true,  10880)
         );
     }
-    return gte;
+    return gce;
 }
 
 function singleGateCheckEvent$(isCheckin, delay) {
