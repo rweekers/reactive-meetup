@@ -7,7 +7,7 @@ import nl.craftsmen.workshops.reactivemeetup.util.RailwayStreams;
 
 import rx.Observable;
 
-public class Exercise07 {
+public class Exercise03 {
 
 	public static void main(String[] args) {
 		
