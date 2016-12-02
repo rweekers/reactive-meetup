@@ -2,6 +2,10 @@ var Rx = require('rxjs/Rx');
 var sample = require('./utils').sample;
 var TravelCostMatrix = require('../domain/railway/travel-cost-matrix');
 var GateCheckEvent = require('../domain/railway/gate-check-event');
+var TrainSimulationParameters = require('../domain/railway/train-simulation-parameters');
+var StationaryTrainSimulation = require('../domain/railway/stationary-train-simulation');
+var TrainJourneySimulation = require('../domain/railway/train-journey-simulation');
+var CompositeTrainSimulation = require('../domain/railway/composite-train-simulation');
 
 let gte;
 
@@ -18,6 +22,20 @@ exports.personalCheckinsCheckouts$ = sample(Rx.Observable.of(
 ));
 
 exports.travelCostMatrix = getTravelCostMatrix();
+
+exports.trainMetrics$ =  getTrainMetrics$();
+
+function getTrainMetrics$() {
+    simulationParameters = new TrainSimulationParameters(100, 140 / 3.6, 2 / 3.6, "1042", 40.0);
+
+    simulation = new CompositeTrainSimulation(
+        new StationaryTrainSimulation(RailwayStation.AMR.getLocation(), 60.0),
+        new TrainJourneySimulation(RailwayStation.AMR.getLocation(), RailwayStation.UTR.getLocation()),
+        new StationaryTrainSimulation(RailwayStation.UTR.getLocation(), 60.0)
+    );
+    
+    return simulation.trainMetrics$(simulationParameters, Date.now());
+}
 
 function gateCheckEvent$() {
     if (gte == null) {
