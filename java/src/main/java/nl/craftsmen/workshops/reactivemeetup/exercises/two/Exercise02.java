@@ -7,7 +7,7 @@ import nl.craftsmen.workshops.reactivemeetup.domain.railway.TravelCostMatrix;
 import nl.craftsmen.workshops.reactivemeetup.util.RailwayStreams;
 import rx.Observable;
 
-public class Exercise06 {
+public class Exercise02 {
 	
 	private static final double NO_CHECKOUT_COST = 20.0;
 
@@ -23,7 +23,7 @@ public class Exercise06 {
 		Observable<GateCheckEvent> gateCheckEvent$ = RailwayStreams.personalCheckinsCheckouts$();
 		
 		// ASSIGNMENT: Given the gateCheckEvent$ of check-in and check-out events compute the cumulative travel cost. The resulting stream
-		// should emit the total travel cost for every new journey.
+		// should emit the total travel cost for every new journey. For this exercise you are not allowed to use the buffer operator.
 		//
 		// HINT: To solve this exercise you will first need to find a method to obtain a stream of two successive gate check-in/out events.
 		//

@@ -31,7 +31,7 @@ public class CompositeTrainSimulation implements TrainSimulation {
 	private static class SimulationConcatenator {
 
 		private final Iterator<TrainSimulation> simulations;
-		private final Observer<TrainMetrics> publisher;
+		private final Observer<TrainMetrics> observer;
 		private final TrainSimulationParameters parameters;
 		private long nextStartTime;
 		
@@ -42,14 +42,14 @@ public class CompositeTrainSimulation implements TrainSimulation {
 			long startTime
 		) {
 			this.simulations = simulations;
-			this.publisher = publisher;
+			this.observer = publisher;
 			this.parameters = parameters;
 			this.nextStartTime = startTime;
 		}
 		
 		public void concatNextSimulation() {
 			if (!simulations.hasNext()) {
-				publisher.onCompleted();
+				observer.onCompleted();
 				return;
 			}
 			
@@ -58,9 +58,9 @@ public class CompositeTrainSimulation implements TrainSimulation {
 			simulation.trainMetrics$(parameters, nextStartTime).subscribe(
 				(metrics) -> {
 					nextStartTime = metrics.getTimestamp();
-					publisher.onNext(metrics);
+					observer.onNext(metrics);
 				},
-				publisher::onError,
+				observer::onError,
 				this::concatNextSimulation
 			);
 		}
