@@ -13,7 +13,7 @@ var personalCheckinsCheckouts$ = require('../../util/railway-streams.js').person
 var costMatrix = require('../../util/railway-streams.js').travelCostMatrix;
 
 // ASSIGNMENT: Given the gateCheckEvent$ of check-in and check-out events compute the cumulative travel cost. The resulting stream
-// should emit the total travel cost for every new journey.
+// should emit the total travel cost for every new journey. For this exercise you are not allowed to use the buffer operator.
 //
 // HINT: To solve this exercise you will first need to find a method to obtain a stream of two successive gate check-in/out events.
 //
@@ -25,9 +25,9 @@ var costMatrix = require('../../util/railway-streams.js').travelCostMatrix;
 var travelCost$ = Rx.Observable.zip(personalCheckinsCheckouts$, personalCheckinsCheckouts$.skip(1), 
     (a, b) => {
         if (a.isCheckIn() && b.isCheckOut()) {
-            return costMatrix.getTravelCost(a.getRailwayStation(), b.getRailwayStation())
+            return costMatrix.getTravelCost(a.getRailwayStation(), b.getRailwayStation());
         } else if (a.isCheckIn() && b.isCheckIn()) {
-            return NO_CHECKOUT_COST
+            return NO_CHECKOUT_COST;
         }
         return 0.0;
     })
