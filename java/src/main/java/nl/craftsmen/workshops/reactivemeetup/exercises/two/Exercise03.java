@@ -43,6 +43,7 @@ public class Exercise03 {
 		
 		Observable<Double> averageVelocity$ = trainMetrics$
 			.buffer(10, 5)
+			.filter((measurements) -> measurements.size() > 1)
 			.map((measurements) -> {
 				TrainMetrics first = measurements.get(0);
 				TrainMetrics last = measurements.get(measurements.size() - 1);

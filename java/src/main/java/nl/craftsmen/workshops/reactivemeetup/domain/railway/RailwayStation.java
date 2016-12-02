@@ -1,5 +1,7 @@
 package nl.craftsmen.workshops.reactivemeetup.domain.railway;
 
+import java.util.Arrays;
+
 public enum RailwayStation {
 
     AMS("AMS", "Amsterdam Centraal", new LatLong(52.3791283, 4.8980833)),
@@ -35,6 +37,12 @@ public enum RailwayStation {
 	@Override
 	public String toString() {
 		return name + " (" + id + ")";
+	}
+	
+	public static RailwayStation closestTo(LatLong position) {
+		return Arrays.stream(values())
+			.reduce((a, b) -> a.getLocation().distanceTo(position) < b.getLocation().distanceTo(position) ? a : b)
+			.get();
 	}
 
 }

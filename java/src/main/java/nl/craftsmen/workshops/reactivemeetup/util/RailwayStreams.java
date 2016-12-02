@@ -63,6 +63,14 @@ public class RailwayStreams {
 			new GateCheckEvent(false, parseDate("08:39:21.512 17-12-2016"), RailwayStation.AMS))),
 		500);
 	}
+	
+	private static long parseDate(String dateString) {
+		try {
+			return DATE_FORMAT.parse(dateString).getTime();
+		} catch (ParseException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	public static TravelCostMatrix travelCostMatrix() {
 		return TravelCostMatrix.builder()
@@ -89,13 +97,20 @@ public class RailwayStreams {
 		
 		return simulation.trainMetrics$(simulationParameters, System.currentTimeMillis());
 	}
-
-	private static long parseDate(String dateString) {
-		try {
-			return DATE_FORMAT.parse(dateString).getTime();
-		} catch (ParseException e) {
-			throw new RuntimeException(e);
-		}
+	
+	public static Observable<Double> velocity$(Observable<TrainMetrics> trainMetrics$) {
+		return trainMetrics$
+			.buffer(10, 5)
+			.filter((measurements) -> measurements.size() > 1)
+			.map((measurements) -> {
+				TrainMetrics first = measurements.get(0);
+				TrainMetrics last = measurements.get(measurements.size() - 1);
+				long elapsedTime = last.getTimestamp() - first.getTimestamp();
+				double distance = last.getPosition().distanceTo(first.getPosition());
+				double velocity = distance * 1000 / elapsedTime;
+				return velocity;
+			})
+			.map((velocity) -> velocity * 3.6);
 	}
 
 }

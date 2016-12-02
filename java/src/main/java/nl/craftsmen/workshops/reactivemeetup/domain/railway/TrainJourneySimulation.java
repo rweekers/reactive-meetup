@@ -31,13 +31,13 @@ public class TrainJourneySimulation implements TrainSimulation {
 		
 		double tickDelay = 1000.0 / parameters.getTickFrequency();
 		
-		int requiredNumberOfFrames = (int) Math.ceil(totalTime * 1000 / (tickDelay * parameters.getTimeDilation())) + 1;
+		int requiredNumberOfFrames = (int) Math.ceil(totalTime * 1000 / (tickDelay * parameters.getTimeDilation()));
 		
 		return Observable.interval((long) Math.round(tickDelay), TimeUnit.MILLISECONDS)
 			.take(requiredNumberOfFrames)
 			.map((frameIndex) -> {
 				
-				double elapsedTime = (frameIndex * tickDelay) / 1000.0 * parameters.getTimeDilation();
+				double elapsedTime = ((frameIndex + 1) * tickDelay) / 1000.0 * parameters.getTimeDilation();
 				
 				double distance;
 				if (elapsedTime < accelerationTime) {

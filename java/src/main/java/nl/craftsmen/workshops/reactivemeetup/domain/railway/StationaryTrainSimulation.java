@@ -19,12 +19,12 @@ public class StationaryTrainSimulation implements TrainSimulation {
 	public Observable<TrainMetrics> trainMetrics$(TrainSimulationParameters parameters, long startTime) {
 		double tickDelay = 1000.0 / parameters.getTickFrequency();
 		
-		int requiredNumberOfFrames = (int) Math.ceil(stationaryTime * 1000 / (tickDelay * parameters.getTimeDilation())) + 1;
+		int requiredNumberOfFrames = (int) Math.ceil(stationaryTime * 1000 / (tickDelay * parameters.getTimeDilation()));
 		
 		return Observable.interval((long) Math.round(tickDelay), TimeUnit.MILLISECONDS)
 			.take(requiredNumberOfFrames)
 			.map((frameIndex) -> {
-				double elapsedTime = (frameIndex * tickDelay) / 1000.0 * parameters.getTimeDilation();
+				double elapsedTime = ((frameIndex + 1) * tickDelay) / 1000.0 * parameters.getTimeDilation();
 				
 				return new TrainMetrics(parameters.getTrainId(), startTime + (long)(elapsedTime * 1000), position);
 			});
