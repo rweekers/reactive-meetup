@@ -8,18 +8,18 @@ module.exports = class StationaryTrainSimulation {
 		this.stationaryTime = stationaryTime;
 	}
 
-	trainMetics$() {
+	trainMetrics$(parameters, startTime) {
 				
-		tickDelay = 1000.0 / parameters.getTickFrequency();
+		const tickDelay = 1000.0 / parameters.getTickFrequency();
 		
-		requiredNumberOfFrames = Math.ceil(this.stationaryTime * 1000 / (tickDelay * parameters.getTimeDilation())) + 1;
+		const requiredNumberOfFrames = Math.ceil(this.stationaryTime * 1000 / (tickDelay * parameters.getTimeDilation()));
 		
 		return Rx.Observable.interval(Math.round(tickDelay))
 			.take(requiredNumberOfFrames)
 			.map((frameIndex) => {
-				elapsedTime = (frameIndex * tickDelay) / 1000.0 * parameters.getTimeDilation();
+				const elapsedTime = ((frameIndex + 1) * tickDelay) / 1000.0 * parameters.getTimeDilation();
 				
-				return new TrainMetrics(parameters.getTrainId(), startTime + (long)(elapsedTime * 1000), position);
+				return new TrainMetrics(parameters.getTrainId(), startTime + Math.floor(elapsedTime * 1000), this.position);
 			});
 	}
 }	

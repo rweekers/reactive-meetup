@@ -6,6 +6,7 @@ var TrainSimulationParameters = require('../domain/railway/train-simulation-para
 var StationaryTrainSimulation = require('../domain/railway/stationary-train-simulation');
 var TrainJourneySimulation = require('../domain/railway/train-journey-simulation');
 var CompositeTrainSimulation = require('../domain/railway/composite-train-simulation');
+var RailwayStation = require('../domain/railway/railway-station');
 
 let gte;
 
@@ -29,9 +30,9 @@ function getTrainMetrics$() {
     simulationParameters = new TrainSimulationParameters(100, 140 / 3.6, 2 / 3.6, "1042", 40.0);
 
     simulation = new CompositeTrainSimulation(
-        new StationaryTrainSimulation(RailwayStation.AMR.getLocation(), 60.0),
-        new TrainJourneySimulation(RailwayStation.AMR.getLocation(), RailwayStation.UTR.getLocation()),
-        new StationaryTrainSimulation(RailwayStation.UTR.getLocation(), 60.0)
+        new StationaryTrainSimulation(RailwayStation.AMR.location, 60.0),
+        new TrainJourneySimulation(RailwayStation.AMR.location, RailwayStation.UTR.location),
+        new StationaryTrainSimulation(RailwayStation.UTR.location, 60.0)
     );
     
     return simulation.trainMetrics$(simulationParameters, Date.now());

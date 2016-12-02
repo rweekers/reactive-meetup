@@ -23,16 +23,16 @@ module.exports = class LatLong {
      * the method is called.
 	 */
 	 distanceTo(other) {
-		latitude1 = Math.toRadians(this.latitude);
-		latitude2 = Math.toRadians(other.latitude);
-		longitude1 = Math.toRadians(this.longitude);
-		longitude2 = Math.toRadians(other.longitude);
+		const latitude1 = this.toRadians(this.latitude);
+		const latitude2 = this.toRadians(other.latitude);
+		const longitude1 = this.toRadians(this.longitude);
+		const longitude2 = this.toRadians(other.longitude);
 		
-		deltaLatitude = latitude2 - latitude1;
-		deltaLongitude = longitude2 - longitude1;
+		const deltaLatitude = latitude2 - latitude1;
+		const deltaLongitude = longitude2 - longitude1;
 		
-		a = Math.square(Math.sin(deltaLatitude / 2)) + Math.cos(latitude1) * Math.cos(latitude2) * Math.square(deltaLongitude / 2);
-		c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		const a = this.square(Math.sin(deltaLatitude / 2)) + Math.cos(latitude1) * Math.cos(latitude2) * this.square(deltaLongitude / 2);
+		const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 		
 		return EARTH_RADIUS * c;		
 	}
@@ -51,5 +51,13 @@ module.exports = class LatLong {
 	
 	toString() {
 		return "(" + this.latitude + ", " + this.longitude + ")";
+	}
+
+	square(x) {
+		return x * x;
+	}
+
+	toRadians(degrees) {
+		return degrees * Math.PI / 180;
 	}
 }

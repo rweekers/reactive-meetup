@@ -24,7 +24,7 @@ module.exports = class TrainSimulationParameters {
         return this.timeDilation;
     }
 
-    getTickFrequence() {
+    getTickFrequency() {
         return this.tickFrequency;
     }
 
