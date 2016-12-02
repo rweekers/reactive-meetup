@@ -4,66 +4,35 @@ var LatLong = require('./lat-long');
 
 module.exports = class CompositeTrainSimulation {
 
-	constructor(simulations) {
-		
-	}
-	
-	private final List<TrainSimulation> simulations;
-	
-	public CompositeTrainSimulation(TrainSimulation... simulations) {
-		this.simulations = Arrays.asList(simulations);
+	constructor(...simulations) {
+		this.simulations = simulations;
 	}
 
-	@Override
-	public Observable<TrainMetrics> trainMetrics$(TrainSimulationParameters parameters, long startTime) {
+	trainMetrics$(parameters, startTime) {
 		
-		PublishSubject<TrainMetrics> publisher = PublishSubject.create();
-		
-		SimulationConcatenator concatenator = new SimulationConcatenator(simulations.iterator(), publisher, parameters, startTime);
-		
-		concatenator.concatNextSimulation();
-		
+		const publisher = new Rx.Subject();
+
+		this.concatNextSimulation(this.simulations, publisher, parameters, startTime);
+
 		return publisher.asObservable();
 	}
-	
-	private static class SimulationConcatenator {
 
-		private final Iterator<TrainSimulation> simulations;
-		private final Observer<TrainMetrics> publisher;
-		private final TrainSimulationParameters parameters;
-		private long nextStartTime;
-		
-		public SimulationConcatenator(
-			Iterator<TrainSimulation> simulations,
-			Observer<TrainMetrics> publisher,
-			TrainSimulationParameters parameters,
-			long startTime
-		) {
-			this.simulations = simulations;
-			this.publisher = publisher;
-			this.parameters = parameters;
-			this.nextStartTime = startTime;
+	concatNextSimulation(simulations, publisher, parameters, startTime) {
+		if (!simulations.length) {
+			publisher.complete();
+			return;
 		}
 		
-		public void concatNextSimulation() {
-			if (!simulations.hasNext()) {
-				publisher.onCompleted();
-				return;
-			}
-			
-			TrainSimulation simulation = simulations.next();
-			
-			simulation.trainMetrics$(parameters, nextStartTime).subscribe(
-				(metrics) -> {
-					nextStartTime = metrics.getTimestamp();
-					publisher.onNext(metrics);
-				},
-				publisher::onError,
-				this::concatNextSimulation
-			);
-		}
+		const [simulation, ...rest] = simulations;
+		let nextStartTime = startTime;
 		
+		simulation.trainMetrics$(parameters, nextStartTime).subscribe(
+			(metrics) => {
+				nextStartTime = metrics.getTimestamp();
+				publisher.next(metrics);
+			},
+			publisher.error.bind(publisher),
+			() => this.concatNextSimulation(rest, publisher, parameters, nextStartTime)
+		);
 	}
-
 }
-

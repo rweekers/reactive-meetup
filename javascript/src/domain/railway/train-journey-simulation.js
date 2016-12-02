@@ -9,46 +9,46 @@ module.exports = class TrainJourneySimulation {
 		this.destinationPosition = destinationPosition;
 	}
 
-	trainMetics$(parameters, startTime) {
+	trainMetrics$(parameters, startTime) {
 				
-		totalDistance = startPosition.distanceTo(destinationPosition);
+		const totalDistance = this.startPosition.distanceTo(this.destinationPosition);
 		
-		accelerationTime = parameters.getMaxVelocity() / parameters.getAcceleration();
-		accelerationDistance = 0.5 * parameters.getAcceleration() * accelerationTime * accelerationTime;
+		const accelerationTime = parameters.getMaxVelocity() / parameters.getAcceleration();
+		const accelerationDistance = 0.5 * parameters.getAcceleration() * accelerationTime * accelerationTime;
 		
 		// TODO adjust acceleration time and distance when unable to achieve max velocity for short distances.
 		
-		unacceleratedDistance = totalDistance - 2 * accelerationDistance;
-		unacceleratedTime = unacceleratedDistance / parameters.getMaxVelocity();
+		const unacceleratedDistance = totalDistance - 2 * accelerationDistance;
+		const unacceleratedTime = unacceleratedDistance / parameters.getMaxVelocity();
 		
-		totalTime = 2 * accelerationTime + unacceleratedTime;
+		const totalTime = 2 * accelerationTime + unacceleratedTime;
 		
-		tickDelay = 1000.0 / parameters.getTickFrequency();
+		const tickDelay = 1000.0 / parameters.getTickFrequency();
 		
-		requiredNumberOfFrames = Math.ceil(totalTime * 1000 / (tickDelay * parameters.getTimeDilation())) + 1;
+		const requiredNumberOfFrames = Math.ceil(totalTime * 1000 / (tickDelay * parameters.getTimeDilation()));
 		
-		return Observable.interval(Math.round(tickDelay))
+		return Rx.Observable.interval(Math.round(tickDelay))
 			.take(requiredNumberOfFrames)
 			.map((frameIndex) => {
 				
-				elapsedTime = (frameIndex * tickDelay) / 1000.0 * parameters.getTimeDilation();
+				const elapsedTime = ((frameIndex + 1) * tickDelay) / 1000.0 * parameters.getTimeDilation();
 				
-				distance;
+				let distance;
 				if (elapsedTime < accelerationTime) {
 					distance = 0.5 * parameters.getAcceleration() * elapsedTime * elapsedTime;
 				} else if (elapsedTime < unacceleratedTime + accelerationTime) {
 					distance = accelerationDistance + parameters.getMaxVelocity() * (elapsedTime - accelerationTime);
 				} else {
-					t = Math.min(accelerationTime, elapsedTime - accelerationTime - unacceleratedTime);
+					const t = Math.min(accelerationTime, elapsedTime - accelerationTime - unacceleratedTime);
 					distance = Math.min(totalDistance, accelerationDistance + unacceleratedDistance +
 						parameters.getMaxVelocity() * t - 0.5 * parameters.getAcceleration() * t * t);
 				}
 				
-				normalizedDistance = distance / totalDistance;
+				const normalizedDistance = distance / totalDistance;
 				
-				currentPosition = startPosition.interpolate(destinationPosition, normalizedDistance);
+				const currentPosition = this.startPosition.interpolate(this.destinationPosition, normalizedDistance);
 				
-				return new TrainMetrics(parameters.getTrainId(), startTime + (long)(elapsedTime * 1000), currentPosition);
+				return new TrainMetrics(parameters.getTrainId(), startTime + Math.floor(elapsedTime * 1000), currentPosition);
 			});
 	}
 }
