@@ -5,6 +5,11 @@ module.exports = class TravelCostMatrix {
     }
 
     addCostEntry(from, to, cost) {
+        this.addOneWayCostEntry(from, to, cost);
+        this.addOneWayCostEntry(to, from, cost);
+    }
+    
+    addOneWayCostEntry(from, to, cost) {
         var entries = this.costMatrix.get(from);
         if (entries == null) {
             entries = new Map();
