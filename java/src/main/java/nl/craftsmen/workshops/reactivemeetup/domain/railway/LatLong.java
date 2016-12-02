@@ -6,7 +6,7 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 
-public class LatLong {
+public class 	LatLong {
 	
 	private final double EARTH_RADIUS = 6371E3; // meter
 	
