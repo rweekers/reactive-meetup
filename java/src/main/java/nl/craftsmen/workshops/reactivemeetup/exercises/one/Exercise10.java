@@ -27,7 +27,6 @@ public class Exercise10 {
             .map((subtotal) -> subtotal.getSum() / subtotal.getCount());
         
 		// If implemented correctly you should see the following values:
-        //
 		//   2827.43, 3926.99, 2751.33, 2313.50, 1890.80, 1875.66, 1736.28, 1631.75, 1528.22
         
         averageArea$

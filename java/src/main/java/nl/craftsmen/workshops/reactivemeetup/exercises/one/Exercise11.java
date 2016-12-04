@@ -25,7 +25,6 @@ public class Exercise11 {
 			});
 		
 		// If implemented correctly, only one line is printed to console:
-		//
 		//   Circle 40: 5026.548245743669
 		
 		largestShape$.map((i) -> i.getName() + ": " + i.calculateArea())

@@ -1,12 +1,12 @@
-var Rx = require('rxjs/Rx');
-var numbersWithErrors$ = require('../../util/example-streams.js').numbersWithErrors$;
+const Rx = require('rxjs/Rx');
+const numbersWithErrors$ = require('../../util/example-streams.js').numbersWithErrors$;
 
 // ASSIGNMENT: Subscribe to the number$ stream and log each event (next, error, complete) to the console.
 
 numbersWithErrors$.subscribe(
-    (value) => console.log("next: " + value),
-    (error) => console.log("error: " + error),
-    ()      => console.log("completed")
+    (value) => console.log('next: ' + value),
+    (error) => console.log('error: ' + error),
+    ()      => console.log('completed')
 );
 
 // If you have completed the assignment successfully you should see the an output that is similar to:

@@ -1,10 +1,10 @@
-var Rx = require('rxjs/Rx');
-var sample = require('./utils').sample;
-var Ingredient = require('../domain/cooking/ingredient');
-var Circle = require('../domain/geometry/circle');
-var Rectangle = require('../domain/geometry/rectangle');
-var Square = require('../domain/geometry/square');
-var Triangle = require('../domain/geometry/triangle');
+const Rx = require('rxjs/Rx');
+const sample = require('./utils').sample;
+const Ingredient = require('../domain/cooking/ingredient');
+const Circle = require('../domain/geometry/circle');
+const Rectangle = require('../domain/geometry/rectangle');
+const Square = require('../domain/geometry/square');
+const Triangle = require('../domain/geometry/triangle');
 
 const number$ = sample(Rx.Observable.of(1, 9, 4, 7, 6, 2, 2, 7, 3, 4, 8));
 

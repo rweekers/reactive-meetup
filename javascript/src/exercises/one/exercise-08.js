@@ -1,7 +1,6 @@
-var Rx = require('rxjs/Rx');
-var ingredient$ = require('../../util/example-streams.js').ingredient$;
-var Ingredient = require('../../domain/cooking/ingredient');
-var Cake = require('../../domain/cooking/cake');
+const Rx = require('rxjs/Rx');
+const ingredient$ = require('../../util/example-streams.js').ingredient$;
+const Cake = require('../../domain/cooking/cake');
 
 // ASSIGNMENT: Make a cake using the only fruits from the ingredient$ stream.
 //
@@ -17,8 +16,8 @@ var Cake = require('../../domain/cooking/cake');
 
 const cake$ = ingredient$
     .filter((ingredient) => ingredient.getType() === 'FRUIT')
-    .scan((cake, ingredient) => cake.addIngredient(ingredient), new Cake("Fruitcake"));
-
-cake$.subscribe((cake) => console.log(cake.createRecipe()));
+    .scan((cake, ingredient) => cake.addIngredient(ingredient), new Cake('Fruitcake'));
 
 // If you've followed the recipe then you should end up with a delicious and healthy strawberry pineapple cake.
+
+cake$.subscribe((cake) => console.log(cake.createRecipe()));
