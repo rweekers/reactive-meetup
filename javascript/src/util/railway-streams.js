@@ -1,14 +1,14 @@
-var Rx = require('rxjs/Rx');
-var sample = require('./utils').sample;
-var TravelCostMatrix = require('../domain/railway/travel-cost-matrix');
-var GateCheckEvent = require('../domain/railway/gate-check-event');
-var TrainSimulationParameters = require('../domain/railway/train-simulation-parameters');
-var StationaryTrainSimulation = require('../domain/railway/stationary-train-simulation');
-var TrainJourneySimulation = require('../domain/railway/train-journey-simulation');
-var CompositeTrainSimulation = require('../domain/railway/composite-train-simulation');
-var RailwayStation = require('../domain/railway/railway-station');
+const Rx = require('rxjs/Rx');
+const sample = require('./utils').sample;
+const TravelCostMatrix = require('../domain/railway/travel-cost-matrix');
+const GateCheckEvent = require('../domain/railway/gate-check-event');
+const TrainSimulationParameters = require('../domain/railway/train-simulation-parameters');
+const StationaryTrainSimulation = require('../domain/railway/stationary-train-simulation');
+const TrainJourneySimulation = require('../domain/railway/train-journey-simulation');
+const CompositeTrainSimulation = require('../domain/railway/composite-train-simulation');
+const RailwayStation = require('../domain/railway/railway-station');
 
-let gce;
+let gateCheckEvent;
 
 exports.gateCheckEvents$ = gateCheckEvent$();
 
@@ -51,8 +51,8 @@ exports.velocity$ = (trainMetrics$) => trainMetrics$
     .map((velocity) => velocity * 3.6);
 
 function gateCheckEvent$() {
-    if (gce == null) {
-        gce = Rx.Observable.merge(
+    if (gateCheckEvent == null) {
+        gateCheckEvent = Rx.Observable.merge(
             singleGateCheckEvent$(true, 233), 
             singleGateCheckEvent$(true, 978),
             singleGateCheckEvent$(false,  1313),
@@ -65,7 +65,7 @@ function gateCheckEvent$() {
 			singleGateCheckEvent$(true,  10880)
         );
     }
-    return gce;
+    return gateCheckEvent;
 }
 
 function singleGateCheckEvent$(isCheckin, delay) {

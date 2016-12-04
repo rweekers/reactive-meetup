@@ -1,6 +1,6 @@
-var Rx = require('rxjs/Rx');
-var TrainMetrics = require('./train-metrics');
-var LatLong = require('./lat-long');
+const Rx = require('rxjs/Rx');
+const TrainMetrics = require('./train-metrics');
+const LatLong = require('./lat-long');
 
 module.exports = class TrainJourneySimulation {
 
