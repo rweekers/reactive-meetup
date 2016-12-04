@@ -1,26 +1,44 @@
-# Reactive Programming Workshop for Java
+# Reactive Programming Workshop for JavaScript
 
 ## Setup
 
-* First make sure you've got Node.js installed on your machine.
-If not you can download the latest version from: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+* First make sure you've got Node.js installed on your machine (version 6 or higher is required).
+You can download the latest version from: [https://nodejs.org/en/download/](https://nodejs.org/en/download/).
+To verify whether Node.js was installed correctly and which version you have running, execute the following command from a console:
+```
+node -v
+```
 
 * [Download](https://gitlab.com/craftsmen/reactive-meetup/repository/archive.zip?ref=master) or [clone](https://gitlab.com/craftsmen/reactive-meetup.git) the workshop files from [https://gitlab.com/craftsmen/reactive-meetup](https://gitlab.com/craftsmen/reactive-meetup)
 
 * Once you have downloaded or cloned the workshop files open the `javascript` directory with your favorite IDE or editor.
 
+* Additionally you need to install the NPM dependencies for the workshop.
+To do so open a console and navigate to the `javascript` directory of the workshop.
+From this directory execute the following command:
+```
+npm install
+```
+
 ## Exercises
 
-You can find the exercises in the `exercises` directory.
-There are two subpackages `one` and `two` for both parts of the workshop.
+You can find the exercises in the `src/exercises` directory.
+There are two subdirectories `one` and `two` for both parts of the workshop.
 Within each of these directories you will find files labeled `exercise-xx.js` which can be executed with Node.js.
 Every exercise file contains the necessary information and assignment to solve the exercise.
 None of the exercises depend on other exercises, so if necessary you can skip exercises (although we do not recommend that).
 
+To run an exercise execute the following command in a console:
+
+```
+node src/exercises/one/exercise-01.js
+```
+
 ## Reference resources
 
-An online version of the presentation can be viewed [here](https://en.wikipedia.org/wiki/HTTP_404) which you can use as reference material for workshop exercises.
-Furthermore visit the ReactiveX documentation page for more detailed information about RxJava:
+A link to the online version of the presentation will be published [here](https://gitlab.com/craftsmen/reactive-meetup/blob/master/README.md).
+You can use the presentation as reference material for workshop exercises.
+Furthermore visit the ReactiveX documentation page for more detailed information about RxJS:
 
 * [Overview of the ReactiveX operators](http://reactivex.io/documentation/operators.html)
 * [API documentation](http://reactivex.io/rxjs/identifiers.html)
