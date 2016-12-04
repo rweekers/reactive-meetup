@@ -43,6 +43,11 @@ Furthermore visit the ReactiveX documentation page for more detailed information
 * [Overview of the ReactiveX operators](http://reactivex.io/documentation/operators.html)
 * [API documentation](http://reactivex.io/rxjs/identifiers.html)
 
+_Please note that for the workshop we are using RxJS 5._
+_If you search for RxJS documentation online it is likely that you will end up with the documentation for RxJS 4._
+_Although the concepts remain the same, some operators have been renamed or have a slightly different API._
+_Hence always check if you were are looking at the right documentation if things don't appear to be working according to the docs ;)_ 
+
 ## Solutions
 
 The solutions for the exercises are available as well.
