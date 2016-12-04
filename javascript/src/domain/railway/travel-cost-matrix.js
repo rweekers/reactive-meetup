@@ -10,7 +10,7 @@ module.exports = class TravelCostMatrix {
     }
     
     addOneWayCostEntry(from, to, cost) {
-        var entries = this.costMatrix.get(from);
+        let entries = this.costMatrix.get(from);
         if (entries == null) {
             entries = new Map();
             this.costMatrix.set(from, entries);
@@ -27,7 +27,7 @@ module.exports = class TravelCostMatrix {
             throw new Error('No entry in travel expense matrix for starting railway station ' + from);
         }
 
-        var destinationCosts = this.costMatrix.get(from);
+        const destinationCosts = this.costMatrix.get(from);
 
         if (!destinationCosts.get(to)) {
             throw new Error('No entry in travel expense matrix for arrival railway station ' + to);

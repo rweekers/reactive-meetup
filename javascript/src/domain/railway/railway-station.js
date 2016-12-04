@@ -1,4 +1,4 @@
-var LatLong = require('./lat-long');
+const LatLong = require('./lat-long');
 
 class RailwayStation {
 

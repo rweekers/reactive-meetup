@@ -1,5 +1,5 @@
-var Rx = require('rxjs/Rx');
-var TrainMetrics = require('./train-metrics');
+const Rx = require('rxjs/Rx');
+const TrainMetrics = require('./train-metrics');
 
 module.exports = class StationaryTrainSimulation {
 

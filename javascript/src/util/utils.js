@@ -1,4 +1,4 @@
-var Rx = require('rxjs/Rx');
+const Rx = require('rxjs/Rx');
 
 exports.sample = function(stream) {
     return Rx.Observable.interval(500).zip(stream, (a, b) => b);
