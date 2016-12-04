@@ -38,7 +38,7 @@ function getTrainMetrics$() {
     return simulation.trainMetrics$(simulationParameters, Date.now());
 }
 
-exports.velocity$ = getTrainMetrics$()
+exports.velocity$ = (trainMetrics$) => trainMetrics$
     .bufferCount(10, 5)
     .filter((measurement) => measurement.length > 1)
     .map(([first, ...rest]) => {

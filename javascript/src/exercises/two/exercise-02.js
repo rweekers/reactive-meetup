@@ -1,4 +1,4 @@
-var Rx = require('rxjs/Rx');
+const Rx = require('rxjs/Rx');
 
 const NO_CHECKOUT_COST = 20.0;
 
@@ -8,9 +8,9 @@ const NO_CHECKOUT_COST = 20.0;
 // determined through the costMatrix object above. It might be possible that someone forgets to check in or check out. This
 // situation can be detected by two successive check-in events. In that case the travel cost is 20 euros.
 
-var personalCheckinsCheckouts$ = require('../../util/railway-streams.js').personalCheckinsCheckouts$;
+const personalCheckinsCheckouts$ = require('../../util/railway-streams.js').personalCheckinsCheckouts$;
 
-var costMatrix = require('../../util/railway-streams.js').travelCostMatrix;
+const costMatrix = require('../../util/railway-streams.js').travelCostMatrix;
 
 // ASSIGNMENT: Given the gateCheckEvent$ of check-in and check-out events compute the cumulative travel cost. The resulting stream
 // should emit the total travel cost for every new journey. For this exercise you are not allowed to use the buffer operator.
@@ -20,9 +20,9 @@ var costMatrix = require('../../util/railway-streams.js').travelCostMatrix;
 // HINT: For each pair (a, b) of GateCheckEvents use the following rules to determine the travel cost:
 //  - a.isCheckIn() && b.isCheckOut()  ->  costMatrix.getTravelCost(a.getRailwayStation(), b.getRailwayStation())
 //  - a.isCheckIn() && b.isCheckIn()   ->  NO_CHECKOUT_COST
-//  - otherwise                        ->  Nothing. You can represent this using one of the following: Optional.empty(), null or 0.0
+//  - otherwise                        ->  Nothing. You can represent this using one of the following: undefined, null or 0
 
-var travelCost$ = Rx.Observable.zip(personalCheckinsCheckouts$, personalCheckinsCheckouts$.skip(1), 
+const travelCost$ = personalCheckinsCheckouts$.zip(personalCheckinsCheckouts$.skip(1), 
     (a, b) => {
         if (a.isCheckIn() && b.isCheckOut()) {
             return costMatrix.getTravelCost(a.getRailwayStation(), b.getRailwayStation());

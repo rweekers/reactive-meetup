@@ -1,7 +1,6 @@
 const TrainMovementAction = {
     DEPARTING: 'DEPARTING',
-    ARRIVING: 'ARRIVING',
-    UNKNOWN: 'UNKNOWN'
+    ARRIVING: 'ARRIVING'
 };
 
 module.exports = TrainMovementAction;

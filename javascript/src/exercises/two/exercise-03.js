@@ -1,4 +1,4 @@
-var Rx = require('rxjs/Rx');
+const Rx = require('rxjs/Rx');
 
 // In this exercise you will work with a stream of (simulated) train sensor data. This data is wrapped in a class called
 // TrainMetrics, which has the following properties: 
