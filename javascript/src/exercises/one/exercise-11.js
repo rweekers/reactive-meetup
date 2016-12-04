@@ -6,13 +6,7 @@ const shape$ = require('../../util/example-streams.js').shape$;
 // HINT: Reduce does not emit intermediate results, it may therefore take some time before the result is available and
 // printed to the console.
 
-const largestShape$ =shape$
-    .reduce((a, b) => {
-        if (a.calculateArea() > b.calculateArea()) {
-            return a;
-        }
-        return b;
-    });
+const largestShape$ = null; // ???
 
 
 // If implemented correctly, only one line is printed to console:

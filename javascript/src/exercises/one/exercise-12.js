@@ -10,9 +10,7 @@ const point$ = require('../../util/example-streams.js').point$;
 //
 // HINT: Use the scan operator, followed by the zip operator.
 
-const subtotals$ = point$
-    .scan((a, b) => a + b)
-    .zip(point$, (total, points) => 'Points: ' + points + ' - total: ' + total)
+const subtotals$ = null; // ???
    		
 // If implemented correctly, the application should display the following output:
 //

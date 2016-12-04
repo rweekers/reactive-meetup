@@ -30,17 +30,7 @@ const trainMetrics$ = require('../../util/railway-streams.js').trainMetrics$;
 //
 // HINT: To convert a velocity in meters per second (m/s) to kilometers per hour (Km/h) multiple the velocity with 3.6
 
-const averageVelocity$ = trainMetrics$
-    .bufferCount(10, 5)
-    .filter((measurement) => measurement.length > 1)
-    .map(([first, ...rest]) => {
-        const last = rest[rest.length-1];
-        const elapsedTime = last.getTimestamp() - first.getTimestamp();
-        const distance = last.getPosition().distanceTo(first.getPosition());
-        const velocity = distance * 1000 / elapsedTime;
-        return velocity;
-    })
-    .map((velocity) => velocity * 3.6);
+const averageVelocity$ = null; // ???
 
 // When implemented correctly you should find a maximum velocity of ~ 140 Km/h.
 averageVelocity$.subscribe(console.log);

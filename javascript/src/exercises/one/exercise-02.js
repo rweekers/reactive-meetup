@@ -3,11 +3,7 @@ const numbersWithErrors$ = require('../../util/example-streams.js').numbersWithE
 
 // ASSIGNMENT: Subscribe to the number$ stream and log each event (next, error, complete) to the console.
 
-numbersWithErrors$.subscribe(
-    (value) => console.log('next: ' + value),
-    (error) => console.log('error: ' + error),
-    ()      => console.log('completed')
-);
+//numbersWithErrors$.???
 
 // If you have completed the assignment successfully you should see the an output that is similar to:
 //

@@ -6,8 +6,7 @@ const word$ = require('../../util/example-streams.js').word$;
 // ASSIGNMENT: Concatenate all the words from the word$ stream to form a sentence. Store the final and intermediate
 // results (the partial sentences) in the sentence$ stream.
 
-const sentence$ = word$
-    .scan((sum, item) => sum + ' ' + item);
+const sentence$ = null; // ???
 
 // If implemented correctly you should now know what "jirble" means.
 
