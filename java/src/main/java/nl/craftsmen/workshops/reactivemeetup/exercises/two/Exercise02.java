@@ -23,7 +23,9 @@ public class Exercise02 {
 		Observable<GateCheckEvent> gateCheckEvent$ = RailwayStreams.personalCheckinsCheckouts$();
 		
 		// ASSIGNMENT: Given the gateCheckEvent$ of check-in and check-out events compute the cumulative travel cost. The resulting stream
-		// should emit the total travel cost for every new journey. For this exercise you are not allowed to use the buffer operator.
+		// should emit the total travel cost for every new journey. Often it is possible to a use different set of operators to define 
+		// streams. This is also the case for this assignment. For example you can solve this assignment using the buffer operator. However,
+		// for this exercise we would like you to use another operator, so you are not allowed to use the buffer operator for this exercise.
 		//
 		// HINT: To solve this exercise you will first need to find a method to obtain a stream of two successive gate check-in/out events.
 		//
@@ -32,8 +34,8 @@ public class Exercise02 {
 		//  - a.isCheckIn() && b.isCheckIn()   ->  NO_CHECKOUT_COST
 		//  - otherwise                        ->  Nothing. You can represent this using one of the following: Optional.empty(), null or 0.0
 		
-		Observable<Double> travelCost$ = Observable
-			.zip(gateCheckEvent$, gateCheckEvent$.skip(1), (a, b) -> {
+		Observable<Double> travelCost$ = gateCheckEvent$
+			.zipWith(gateCheckEvent$.skip(1), (a, b) -> {
 				if (a.isCheckIn() && b.isCheckOut()) {
 					return costMatrix.getTravelCost(a.getRailwayStation(), b.getRailwayStation());
 				} else if (a.isCheckIn() && b.isCheckIn()) {
