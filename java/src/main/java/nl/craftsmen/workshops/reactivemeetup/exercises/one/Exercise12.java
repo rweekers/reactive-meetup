@@ -3,7 +3,7 @@ package nl.craftsmen.workshops.reactivemeetup.exercises.one;
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import rx.Observable;
 
-import static nl.craftsmen.workshops.reactivemeetup.util.Utils.waitForStreamToComplete;
+import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
 public class Exercise12 {
 
@@ -18,9 +18,7 @@ public class Exercise12 {
 		//
 		// HINT: Use the scan operator, followed by the zipWith operator.
 		
-		Observable<String> subtotals$ = point$
-                .scan((x, y) -> x + y)
-                .zipWith(point$, (total, points) -> "Points: " + points + " - total: " + total);
+		Observable<String> subtotals$ = unknown(); // ???
 		
 		// If implemented correctly, the application should display the following output:
 		//
@@ -37,6 +35,6 @@ public class Exercise12 {
 		
 		subtotals$.subscribe(System.out::println);
 
-        waitForStreamToComplete(point$);
+        waitForStreamToComplete(subtotals$);
 	}
 }

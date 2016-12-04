@@ -1,6 +1,6 @@
 package nl.craftsmen.workshops.reactivemeetup.exercises.one;
 
-import static nl.craftsmen.workshops.reactivemeetup.util.Utils.waitForStreamToComplete;
+import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
 import nl.craftsmen.workshops.reactivemeetup.domain.geometry.IShape;
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
@@ -18,9 +18,7 @@ public class Exercise09 {
 		// HINT: You do not need to compute the circumference and surface area yourself. Instead you can use the following
 		// functions calculateCircumference() and calculateArea() provide by the IShape interface. 
 		
-		Observable<Double> circumference$ = shape$
-			.filter((i) -> i.calculateArea() > 500)
-            .map(IShape::calculateCircumference);
+		Observable<Double> circumference$ = unknown(); // ???
 		
 		// If implemented correctly you should see the following values:
 		//   188.50, 251.33, 2000.00, 3600.00, 120.00, 145.21, 1400.00
@@ -28,6 +26,6 @@ public class Exercise09 {
 		circumference$.map(Utils.NUMBER_FORMAT::format)
 			.subscribe(System.out::println);
 
-		waitForStreamToComplete(shape$);
+		waitForStreamToComplete(circumference$);
 	}
 }

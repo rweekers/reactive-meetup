@@ -1,6 +1,6 @@
 package nl.craftsmen.workshops.reactivemeetup.exercises.one;
 
-import static nl.craftsmen.workshops.reactivemeetup.util.Utils.waitForStreamToComplete;
+import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import rx.Observable;
@@ -14,8 +14,7 @@ public class Exercise07 {
         // ASSIGNMENT: Concatenate all the words from the word$ stream to form a sentence. Store the final and intermediate
         // results (the partial sentences) in the sentence$ stream.
         
-        Observable<String> sentence$ = word$
-        	.scan((sum, item) -> sum + " " + item);
+        Observable<String> sentence$ = unknown(); // ???
         
         // If implemented correctly you should now know what "jirble" means.
         
@@ -29,6 +28,6 @@ public class Exercise07 {
         
         sentence$.subscribe(System.out::println);
 
-        waitForStreamToComplete(word$);
+        waitForStreamToComplete(sentence$);
     }
 }

@@ -12,11 +12,7 @@ public class Exercise02 {
 		
 		// ASSIGNMENT: Subscribe to the number$ stream and log each event (next, error, complete) to the console.
 		
-		number$.subscribe(
-			(value) -> System.out.println("next: " + value),
-			(error) -> System.out.println("error: " + error),
-			()      -> System.out.println("completed")
-		);
+		//number$.???
 		
 		// If you have completed the assignment successfully you should see the an output that is similar to:
 		//

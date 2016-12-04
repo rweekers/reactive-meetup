@@ -17,7 +17,7 @@ public class Exercise01 {
 		//   (value) -> System.out.print(value)
 		//   System.out::println
 		
-		number$.subscribe(System.out::println);
+		//number$.???
 		
 		// The standard RxJava scheduler uses daemon threads by default. To make sure the application does not terminate
 		// immediately we have to block the main thread until the stream completes. For this reason we created a the

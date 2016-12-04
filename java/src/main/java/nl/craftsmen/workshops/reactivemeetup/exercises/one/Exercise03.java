@@ -1,6 +1,6 @@
 package nl.craftsmen.workshops.reactivemeetup.exercises.one;
 
-import static nl.craftsmen.workshops.reactivemeetup.util.Utils.waitForStreamToComplete;
+import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import rx.Observable;
@@ -12,8 +12,7 @@ public class Exercise03 {
 		
 		// ASSIGNMENT: Create a new stream based on the number$ stream that only emits even numbers.
 		
-		Observable<Integer> evenNumber$ = number$
-			.filter((i) -> i % 2 == 0);
+		Observable<Integer> evenNumber$ = unknown(); // ???
 		
 		// If implemented correctly, the application will output the following numbers: 4, 6, 2, 2, 4, 8
 		
