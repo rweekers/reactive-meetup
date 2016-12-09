@@ -1,6 +1,6 @@
 package nl.craftsmen.workshops.reactivemeetup.exercises.one;
 
-import static nl.craftsmen.workshops.reactivemeetup.util.Utils.waitForStreamToComplete;
+import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
 import nl.craftsmen.workshops.reactivemeetup.domain.geometry.IShape;
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;

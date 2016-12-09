@@ -1,6 +1,6 @@
 package nl.craftsmen.workshops.reactivemeetup.exercises.one;
 
-import static nl.craftsmen.workshops.reactivemeetup.util.Utils.waitForStreamToComplete;
+import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
 import nl.craftsmen.workshops.reactivemeetup.domain.cooking.Cake;
 import nl.craftsmen.workshops.reactivemeetup.domain.cooking.EIngredientType;
@@ -33,6 +33,6 @@ public class Exercise08 {
         
         cake$.subscribe(System.out::println);
 
-        waitForStreamToComplete(ingredient$);
+        waitForStreamToComplete(cake$);
     }
 }

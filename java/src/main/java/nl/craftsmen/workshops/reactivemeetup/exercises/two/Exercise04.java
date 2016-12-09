@@ -1,6 +1,6 @@
 package nl.craftsmen.workshops.reactivemeetup.exercises.two;
 
-import static nl.craftsmen.workshops.reactivemeetup.util.Utils.waitForStreamToComplete;
+import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
 import java.util.Optional;
 

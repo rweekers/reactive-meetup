@@ -5,6 +5,7 @@ import rx.Observable;
 import java.text.NumberFormat;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 public class Utils {
@@ -50,5 +51,9 @@ public class Utils {
 		stream
 			.onErrorReturn((error) -> null)
 			.toBlocking().last();
+	}
+	
+	public static <T> Observable<T> unknown() {
+		return Observable.error(new NoSuchElementException());
 	}
 }
