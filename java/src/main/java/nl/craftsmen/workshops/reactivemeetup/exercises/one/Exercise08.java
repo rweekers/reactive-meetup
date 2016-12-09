@@ -27,7 +27,7 @@ public class Exercise08 {
         
         Observable<Cake> cake$ = ingredient$
             .filter((ingredient) -> EIngredientType.FRUIT.equals(ingredient.getType()))
-            .scan(new Cake("Fruitcake"), Cake::addIngredient);
+            .reduce(new Cake("Fruitcake"), Cake::addIngredient);
         
         // If you've followed the recipe then you should end up with a delicious and healthy strawberry pineapple cake.
         

@@ -11,7 +11,7 @@ public class Exercise07 {
     	// The word$ stream will emit a sequence words. Each word is just a string.
         Observable<String> word$ = ExampleStreams.word$();
 
-        // ASSIGNMENT: Concatenate all the words from the word$ stream to form a sentence. Store the final and intermediate
+        // ASSIGNMENT: Concatenate all the words from the word$ stream to form a sentence. Emit the final and intermediate
         // results (the partial sentences) in the sentence$ stream.
         
         Observable<String> sentence$ = word$

@@ -16,8 +16,8 @@ const Cake = require('../../domain/cooking/cake');
 
 const cake$ = ingredient$
     .filter((ingredient) => ingredient.getType() === 'FRUIT')
-    .scan((cake, ingredient) => cake.addIngredient(ingredient), new Cake('Fruitcake'));
+    .reduce((cake, ingredient) => cake.addIngredient(ingredient), new Cake('Fruitcake'));
 
 // If you've followed the recipe then you should end up with a delicious and healthy strawberry pineapple cake.
 
-cake$.subscribe((cake) => console.log(cake.createRecipe()));
+cake$.subscribe((cake) => console.log(cake.toString()));

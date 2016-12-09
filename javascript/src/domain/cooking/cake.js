@@ -14,7 +14,7 @@ module.exports = class Cake {
         return this;
     }
 
-    createRecipe() {
+    toString() {
         let recipe = this.name + ': ';
         for (let i of this.ingredients) {
             recipe = recipe + i.getName().toLowerCase() + ' ';
