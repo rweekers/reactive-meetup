@@ -29,6 +29,6 @@ public class Exercise10 {
             .map(NUMBER_FORMAT::format)
             .subscribe(System.out::println);
 
-        waitForStreamToComplete(shape$);
+        waitForStreamToComplete(averageArea$);
     }
 }

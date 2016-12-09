@@ -31,6 +31,6 @@ public class Exercise08 {
         
         cake$.subscribe(System.out::println);
 
-        waitForStreamToComplete(ingredient$);
+        waitForStreamToComplete(cake$);
     }
 }
