@@ -18,4 +18,4 @@ const cake$ = null; // ???
 
 // If you've followed the recipe then you should end up with a delicious and healthy strawberry pineapple cake.
 
-cake$.subscribe((cake) => console.log(cake.createRecipe()));
+cake$.subscribe((cake) => console.log(cake.toString()));
