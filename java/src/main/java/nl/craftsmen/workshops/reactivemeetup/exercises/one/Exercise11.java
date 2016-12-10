@@ -2,14 +2,14 @@ package nl.craftsmen.workshops.reactivemeetup.exercises.one;
 
 import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
-import nl.craftsmen.workshops.reactivemeetup.domain.geometry.IShape;
+import nl.craftsmen.workshops.reactivemeetup.domain.geometry.Shape;
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import rx.Observable;
 
 public class Exercise11 {
 
 	public static void main(String[] args) {
-		Observable<IShape> shape$ = ExampleStreams.shape$();
+		Observable<Shape> shape$ = ExampleStreams.shape$();
 		
 		// ASSIGNMENT: Use the reduce operator to find the shape that has the largest surface area. Store the result in the
 		// largestShape$ stream.
@@ -17,7 +17,7 @@ public class Exercise11 {
 		// HINT: Reduce does not emit intermediate results, it may therefore take some time before the result is available and
 		// printed to the console.
 		
-		Observable<IShape> largestShape$ = shape$
+		Observable<Shape> largestShape$ = shape$
 			.reduce((a, b) -> {
 				if (a.calculateArea() > b.calculateArea())
                     return a;

@@ -1,6 +1,6 @@
 package nl.craftsmen.workshops.reactivemeetup.domain.geometry;
 
-public class Circle implements IShape {
+public class Circle implements Shape {
 
     private final String name;
     private final int radius;

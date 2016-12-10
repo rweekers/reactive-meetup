@@ -1,6 +1,6 @@
 package nl.craftsmen.workshops.reactivemeetup.domain.cooking;
 
-public enum EIngredientType {
+public enum IngredientType {
 
     BASE,
     FRUIT,
