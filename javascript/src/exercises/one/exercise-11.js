@@ -10,16 +10,16 @@ const shape$ = require('../../util/example-streams.js').shape$;
 // console.
 
 const largestShape$ =shape$
-    .reduce((a, b) => {
-        if (a.calculateArea() > b.calculateArea()) {
-            return a;
-        }
-        return b;
-    });
+	.reduce((a, b) => {
+		if (a.calculateArea() > b.calculateArea()) {
+			return a;
+		}
+		return b;
+	});
 
 
 // If implemented correctly, only one line is printed to console:
 //   Circle 40: 5026.548245743669
 
 largestShape$.map((i) => i.getName() + ': ' + i.calculateArea())
-    .subscribe((i) => console.log(i));
+	.subscribe((i) => console.log(i));

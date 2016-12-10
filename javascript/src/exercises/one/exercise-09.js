@@ -9,8 +9,8 @@ const shape$ = require('../../util/example-streams.js').shape$;
 // functions calculateCircumference() and calculateArea() provide by all shapes in the stream. 
 
 const circumference$ = shape$
-    .filter((i) => i.calculateArea() > 500)
-    .map((i) => i.calculateCircumference());
+	.filter((i) => i.calculateArea() > 500)
+	.map((i) => i.calculateCircumference());
 
 // If implemented correctly you should see the following values:
 //   188.50, 251.33, 2000.00, 3600.00, 120.00, 145.21, 1400.00

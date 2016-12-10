@@ -24,8 +24,8 @@ const gateCheckEvent$ = require('../../util/railway-streams.js').gateCheckEvents
 // desired output.
 
 const gateIsFree$ = Rx.Observable.merge(
-    gateCheckEvent$.map((x) => false),
-    gateCheckEvent$.debounceTime(GATE_OCCUPY_TIME).map((x) => true)
+	gateCheckEvent$.map((x) => false),
+	gateCheckEvent$.debounceTime(GATE_OCCUPY_TIME).map((x) => true)
 ).distinctUntilChanged().startWith(true);
 
 // When implemented correctly you should see the following output:

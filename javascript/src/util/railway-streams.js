@@ -13,8 +13,8 @@ let gateCheckEvent;
 exports.gateCheckEvents$ = gateCheckEvent$();
 
 exports.personalCheckinsCheckouts$ = sample(Rx.Observable.of(
-    new GateCheckEvent(true, new Date(2016, 12, 16, 8, 4, 11, 345), 'UTR'),
-    new GateCheckEvent(false,new Date(2016, 12, 16, 8, 41, 3, 409), 'AMS'),
+	new GateCheckEvent(true, new Date(2016, 12, 16, 8, 4, 11, 345), 'UTR'),
+	new GateCheckEvent(false,new Date(2016, 12, 16, 8, 41, 3, 409), 'AMS'),
 	new GateCheckEvent(true,  new Date(2016, 12, 16, 17, 44, 56, 122), 'AMS'),
 	new GateCheckEvent(false, new Date(2016, 12, 16, 18, 49, 4, 123), 'DH'),
 	new GateCheckEvent(true,  new Date(2016, 12, 16, 22, 15, 44, 616), 'DH'),
@@ -27,56 +27,56 @@ exports.travelCostMatrix = getTravelCostMatrix();
 exports.trainMetrics$ =  getTrainMetrics$();
 
 function getTrainMetrics$() {
-    simulationParameters = new TrainSimulationParameters(100, 140 / 3.6, 2 / 3.6, '1042', 40.0);
+	simulationParameters = new TrainSimulationParameters(100, 140 / 3.6, 2 / 3.6, '1042', 40.0);
 
-    simulation = new CompositeTrainSimulation(
-        new StationaryTrainSimulation(RailwayStation.AMR.location, 60.0),
-        new TrainJourneySimulation(RailwayStation.AMR.location, RailwayStation.UTR.location),
-        new StationaryTrainSimulation(RailwayStation.UTR.location, 60.0)
-    );
-    
-    return simulation.trainMetrics$(simulationParameters, Date.now());
+	simulation = new CompositeTrainSimulation(
+		new StationaryTrainSimulation(RailwayStation.AMR.location, 60.0),
+		new TrainJourneySimulation(RailwayStation.AMR.location, RailwayStation.UTR.location),
+		new StationaryTrainSimulation(RailwayStation.UTR.location, 60.0)
+	);
+	
+	return simulation.trainMetrics$(simulationParameters, Date.now());
 }
 
 exports.velocity$ = (trainMetrics$) => trainMetrics$
-    .bufferCount(10, 5)
-    .filter((measurement) => measurement.length > 1)
-    .map(([first, ...rest]) => {
-        const last = rest[rest.length-1];
-        const elapsedTime = last.getTimestamp() - first.getTimestamp();
-        const distance = last.getPosition().distanceTo(first.getPosition());
-        const velocity = distance * 1000 / elapsedTime;
-        return velocity;
-    })
-    .map((velocity) => velocity * 3.6);
+	.bufferCount(10, 5)
+	.filter((measurement) => measurement.length > 1)
+	.map(([first, ...rest]) => {
+		const last = rest[rest.length-1];
+		const elapsedTime = last.getTimestamp() - first.getTimestamp();
+		const distance = last.getPosition().distanceTo(first.getPosition());
+		const velocity = distance * 1000 / elapsedTime;
+		return velocity;
+	})
+	.map((velocity) => velocity * 3.6);
 
 function gateCheckEvent$() {
-    if (gateCheckEvent == null) {
-        gateCheckEvent = Rx.Observable.merge(
-            singleGateCheckEvent$(true, 233), 
-            singleGateCheckEvent$(true, 978),
-            singleGateCheckEvent$(false,  1313),
-		    singleGateCheckEvent$(true,   2105),
+	if (gateCheckEvent == null) {
+		gateCheckEvent = Rx.Observable.merge(
+			singleGateCheckEvent$(true, 233), 
+			singleGateCheckEvent$(true, 978),
+			singleGateCheckEvent$(false,  1313),
+			singleGateCheckEvent$(true,   2105),
 			singleGateCheckEvent$(false,  3643),
 			singleGateCheckEvent$(false,  4411),
 			singleGateCheckEvent$(true,   5556),
 			singleGateCheckEvent$(false,  8123),
 			singleGateCheckEvent$(false,  9722),
 			singleGateCheckEvent$(true,  10880)
-        );
-    }
-    return gateCheckEvent;
+		);
+	}
+	return gateCheckEvent;
 }
 
 function singleGateCheckEvent$(isCheckin, delay) {
-    return Rx.Observable.of(new GateCheckEvent(isCheckin, Date.now() + delay, 'AMR'))
-        .delay(delay);
+	return Rx.Observable.of(new GateCheckEvent(isCheckin, Date.now() + delay, 'AMR'))
+		.delay(delay);
 }
 
 function getTravelCostMatrix() {
-    const travelCosts = new TravelCostMatrix();
-    travelCosts.addCostEntry('UTR', 'AMS', 7.50);
-    travelCosts.addCostEntry('UTR', 'DH', 11.00);
-    travelCosts.addCostEntry('DH', 'AMS', 11.50);
-    return travelCosts;
+	const travelCosts = new TravelCostMatrix();
+	travelCosts.addCostEntry('UTR', 'AMS', 7.50);
+	travelCosts.addCostEntry('UTR', 'DH', 11.00);
+	travelCosts.addCostEntry('DH', 'AMS', 11.50);
+	return travelCosts;
 }

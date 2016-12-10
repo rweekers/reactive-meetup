@@ -15,10 +15,10 @@ const velocity$ = require('../../util/railway-streams.js').velocity$(trainMetric
 
 // ASSIGNMENT: Using the velocity$ stream, define a new motion$ stream that describes the motion of the train using one of the 
 // the following constants:
-//  - MotionType.ACCELERATING    The train is accelerating (its velocity is increasing).
-//  - MotionType.DECELERATING    The train is decelerating (its velocity is decreasing).
+//  - MotionType.ACCELERATING	The train is accelerating (its velocity is increasing).
+//  - MotionType.DECELERATING	The train is decelerating (its velocity is decreasing).
 //  - MotionType.CONSTANT_SPEED  The train is moving at constant speed.
-//  - MotionType.STATIONARY      The train is not moving at all.
+//  - MotionType.STATIONARY	  The train is not moving at all.
 //
 // HINT: First try to get a stream that emits the acceleration for two subsequent emits of the velocity$ stream. 
 //
@@ -31,16 +31,16 @@ const velocity$ = require('../../util/railway-streams.js').velocity$(trainMetric
 // HINT: Uncomment the "motion$.subscribe(console.log);" line below to test your stream.
 
 const motion$ = velocity$
-    .bufferCount(2, 1)
-    .filter((velocities) => velocities.length > 1)
-    .map((velocities) => velocities[1] - velocities[0])
-    .zip(velocity$.skip(1), (acceleration, velocity) => {
-        if (Math.abs(acceleration) < 0.1) {
-            return velocity < 0.1 ? MotionType.STATIONARY : MotionType.CONSTANT_SPEED;
-        }
-        return acceleration < 0 ? MotionType.DECELERATING : MotionType.ACCELERATING;
-    })
-    .distinctUntilChanged();
+	.bufferCount(2, 1)
+	.filter((velocities) => velocities.length > 1)
+	.map((velocities) => velocities[1] - velocities[0])
+	.zip(velocity$.skip(1), (acceleration, velocity) => {
+		if (Math.abs(acceleration) < 0.1) {
+			return velocity < 0.1 ? MotionType.STATIONARY : MotionType.CONSTANT_SPEED;
+		}
+		return acceleration < 0 ? MotionType.DECELERATING : MotionType.ACCELERATING;
+	})
+	.distinctUntilChanged();
 
 //motion$.subscribe(console.log);
 
@@ -58,19 +58,19 @@ const motion$ = velocity$
 //
 // HINT: Uncomment the "trainAction$.subscribe(console.log);" line below to test your stream.
 const trainAction$ = motion$
-    .bufferCount(2, 1)
-    .filter((motions) => motions.length > 1)
-    .map(([a, b]) => {
+	.bufferCount(2, 1)
+	.filter((motions) => motions.length > 1)
+	.map(([a, b]) => {
 
-        if (a === MotionType.STATIONARY && b === MotionType.ACCELERATING) {
-            return TrainMovementAction.DEPARTING;
-        } else if (a === MotionType.DECELERATING && b === MotionType.STATIONARY) {
-            return TrainMovementAction.ARRIVING;
-        }
+		if (a === MotionType.STATIONARY && b === MotionType.ACCELERATING) {
+			return TrainMovementAction.DEPARTING;
+		} else if (a === MotionType.DECELERATING && b === MotionType.STATIONARY) {
+			return TrainMovementAction.ARRIVING;
+		}
 
-        return undefined;
-    })
-    .filter((result) => !!result);
+		return undefined;
+	})
+	.filter((result) => !!result);
 
 //trainAction$.subscribe(console.log);
 
@@ -85,14 +85,14 @@ const trainAction$ = motion$
 //
 // HINT: Uncomment the "messages$.subscribe(console.log);" line below to test your stream.
 const messages$ = trainAction$
-    .withLatestFrom(trainMetrics$, (action, trainMetrics) => {
-        const station = RailwayStation.closestTo(trainMetrics.getPosition());
+	.withLatestFrom(trainMetrics$, (action, trainMetrics) => {
+		const station = RailwayStation.closestTo(trainMetrics.getPosition());
 
-        if (action === TrainMovementAction.DEPARTING) {
-            return 'Departing from ' + station;
-        } else {
-            return 'Arriving at ' + station;
-        }
-    })
+		if (action === TrainMovementAction.DEPARTING) {
+			return 'Departing from ' + station;
+		} else {
+			return 'Arriving at ' + station;
+		}
+	})
 
 messages$.subscribe(console.log);

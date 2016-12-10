@@ -2,25 +2,25 @@ const EARTH_RADIUS = 6371E3;
 
 module.exports = class LatLong {
 
-    /**
-     * Creates a new geographic coordinate based on latitude and longitude.
-     */
-    constructor(latitude, longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
+	/**
+	 * Creates a new geographic coordinate based on latitude and longitude.
+	 */
+	constructor(latitude, longitude) {
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
 
-    getLatitude() {
+	getLatitude() {
 		return this.latitude;
 	}
 	
-    getLongitude() {
+	getLongitude() {
 		return this.longitude;
 	}
 
-    /**
+	/**
 	 * Computes the distance to the specified latitude/longitude coordinate relative to the coordinate on which 
-     * the method is called.
+	 * the method is called.
 	 */
 	 distanceTo(other) {
 		const latitude1 = this.toRadians(this.latitude);

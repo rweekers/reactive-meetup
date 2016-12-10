@@ -1,15 +1,15 @@
 module.exports = class Ingredient {
 
-    constructor(name, type) {
-        this.name = name;
-        this.type = type;
-    }
+	constructor(name, type) {
+		this.name = name;
+		this.type = type;
+	}
 
-    getName() {
-        return this.name;
-    }
+	getName() {
+		return this.name;
+	}
 
-    getType() {
-    return this.type;
-    }
+	getType() {
+	return this.type;
+	}
 }
