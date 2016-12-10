@@ -18,22 +18,22 @@ public class Exercise02 {
 		//
 		// HINT: Think of which kind of Subject you need to produce the desired output.
 		
-		Subject<String, String> subject = ReplaySubject.create();
+		Subject<String, String> subject = null; // ???
 		
 		runDelayedAsync(1000, () -> {
-			subject.onNext("RxJava is cool :)");
+			// ???
 		});
 		
 		runDelayedAsync(2000, () -> {
-			subject.onNext("So reactive!");
+			// ???
 		});
 		
 		runDelayedAsync(3000, () -> {
-			subject.onNext("Much stream!");
+			// ???
 		});
 		
 		runDelayedAsync(4000, () -> {
-			subject.onCompleted();
+			// ???
 		});
 		
 		subject.subscribe(System.out::println, (error) -> {}, () -> System.out.println("Goodbye!"));		

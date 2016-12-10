@@ -28,10 +28,7 @@ public class Exercise08 {
 		//
 		// HINT: To bake the cake, use the bake() method of the Cake class.
 		
-		Observable<Cake> cake$ = ingredient$
-			.filter((ingredient) -> IngredientType.FRUIT.equals(ingredient.getType()))
-			.reduce(new Cake("Fruitcake"), Cake::addIngredient)
-			.map(Cake::bake);
+		Observable<Cake> cake$ = unknown(); // ???
 		
 		// If you've followed the recipe then you should end up with one baked delicious and healthy strawberry pineapple cake.
 		

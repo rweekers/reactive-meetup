@@ -24,8 +24,7 @@ public class Exercise01 {
 		// With this function the equivalent of the sequence above is written as:
 		// pow(2, 0), pow(2, 1), pow(2, 2), pow(2, 3), pow(2, 4), ...
 		
-		Observable<Long> number$ = Observable.interval(EMIT_DELAY, TimeUnit.MILLISECONDS)
-			.map((count) -> pow(2, count));
+		Observable<Long> number$ = unknown(); // ???
 		
 		// When implemented correctly you should see the following output:
 		// 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024

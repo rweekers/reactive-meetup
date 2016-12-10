@@ -30,17 +30,7 @@ const velocity$ = require('../../util/railway-streams.js').velocity$(trainMetric
 //
 // HINT: Uncomment the "motion$.subscribe(console.log);" line below to test your stream.
 
-const motion$ = velocity$
-	.bufferCount(2, 1)
-	.filter((velocities) => velocities.length > 1)
-	.map((velocities) => velocities[1] - velocities[0])
-	.zip(velocity$.skip(1), (acceleration, velocity) => {
-		if (Math.abs(acceleration) < 0.1) {
-			return velocity < 0.1 ? MotionType.STATIONARY : MotionType.CONSTANT_SPEED;
-		}
-		return acceleration < 0 ? MotionType.DECELERATING : MotionType.ACCELERATING;
-	})
-	.distinctUntilChanged();
+const motion$ = null; // ???
 
 //motion$.subscribe(console.log);
 
@@ -57,20 +47,8 @@ const motion$ = velocity$
 // HINT: Use undefined or null in case irrelevant motion transitions are detected and filter them out in a second step.
 //
 // HINT: Uncomment the "trainAction$.subscribe(console.log);" line below to test your stream.
-const trainAction$ = motion$
-	.bufferCount(2, 1)
-	.filter((motions) => motions.length > 1)
-	.map(([a, b]) => {
 
-		if (a === MotionType.STATIONARY && b === MotionType.ACCELERATING) {
-			return TrainMovementAction.DEPARTING;
-		} else if (a === MotionType.DECELERATING && b === MotionType.STATIONARY) {
-			return TrainMovementAction.ARRIVING;
-		}
-
-		return undefined;
-	})
-	.filter((result) => !!result);
+const trainAction$ = null; // ???
 
 //trainAction$.subscribe(console.log);
 
@@ -84,15 +62,6 @@ const trainAction$ = motion$
 // HINT: Use RailwayStation.closestTo(position) to find the railway station closest to the specified LatLong coordinate.
 //
 // HINT: Uncomment the "messages$.subscribe(console.log);" line below to test your stream.
-const messages$ = trainAction$
-	.withLatestFrom(trainMetrics$, (action, trainMetrics) => {
-		const station = RailwayStation.closestTo(trainMetrics.getPosition());
-
-		if (action === TrainMovementAction.DEPARTING) {
-			return 'Departing from ' + station;
-		} else {
-			return 'Arriving at ' + station;
-		}
-	})
+const messages$ = null; // ???
 
 messages$.subscribe(console.log);

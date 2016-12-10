@@ -7,9 +7,7 @@ const Subtotal = require('../../domain/calculate/subtotal');
 //
 // HINT: Use the Subtotal class as a storage for the sum of the surface area and the number of shapes.
 
-const averageArea$ = shape$
-	.scan((acc, shape) => acc.add(shape.calculateArea()), new Subtotal(0, 0))
-	.map((subtotal) => subtotal.getSum() / subtotal.getCount());
+const averageArea$ = null; // ???
 
 // If implemented correctly you should see the following values:
 //   2827.43, 3926.99, 2751.33, 2313.50, 1890.80, 1875.66, 1736.28, 1631.75, 1528.22

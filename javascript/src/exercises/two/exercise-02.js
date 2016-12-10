@@ -9,22 +9,22 @@ const Rx = require('rxjs/Rx');
 //
 // HINT: Think of which kind of Subject you need to produce the desired output.
 
-const subject = new Rx.ReplaySubject();
+const subject = null; // ???
 
 setTimeout(() => {
-	subject.next('RxJava is cool :)');
+	// ???
 }, 1000);
 
 setTimeout(() => {
-	subject.next('So reactive!');
+	// ???
 }, 2000);
 
 setTimeout(() => {
-	subject.next('Much stream!');
+	// ???
 }, 3000);
 
 setTimeout(() => {
-	subject.complete();
+	// ???
 }, 4000);
 
 subject.subscribe(console.log, () => {}, () => console.log('Goodbye!'));

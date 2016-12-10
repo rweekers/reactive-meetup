@@ -13,8 +13,7 @@ const EMIT_DELAY = 250; // milliseconds
 // HINT: Use the Math.pow function to generate the correct output. With this function the equivalent of the sequence above is written as:
 // Math.pow(2, 0), Math.pow(2, 1), Math.pow(2, 2), Math.pow(2, 3), Math.pow(2, 4), ...
 
-const number$ = Rx.Observable.interval(EMIT_DELAY)
-	.map((count) => Math.pow(2, count));
+const number$ = null; // ???
 
 // When implemented correctly you should see the following output:
 // 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024

@@ -17,10 +17,7 @@ const Cake = require('../../domain/cooking/cake');
 //
 // HINT: To bake the cake, use the bake() method of the Cake class.
 
-const cake$ = ingredient$
-	.filter((ingredient) => ingredient.getType() === 'FRUIT')
-	.reduce((cake, ingredient) => cake.addIngredient(ingredient), new Cake('Fruitcake'))
-	.map((cake) => cake.bake());
+const cake$ = null; // ???
 
 // If you've followed the recipe then you should end up with one baked delicious and healthy strawberry pineapple cake.
 

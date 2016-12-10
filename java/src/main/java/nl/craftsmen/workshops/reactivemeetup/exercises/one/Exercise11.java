@@ -17,12 +17,7 @@ public class Exercise11 {
 		// HINT: Reduce does not emit intermediate results, it may therefore take some time before the result is available and
 		// printed to the console.
 		
-		Observable<Shape> largestShape$ = shape$
-			.reduce((a, b) -> {
-				if (a.calculateArea() > b.calculateArea())
-					return a;
-				return b;
-			});
+		Observable<Shape> largestShape$ = unknown(); // ???
 		
 		// If implemented correctly, only one line is printed to console:
 		//   Circle 40: 5026.548245743669

@@ -18,9 +18,7 @@ public class Exercise12 {
 		//
 		// HINT: Use the scan operator, followed by the zipWith operator.
 		
-		Observable<String> subtotals$ = point$
-				.scan((x, y) -> x + y)
-				.zipWith(point$, (total, points) -> "Points: " + points + " - total: " + total);
+		Observable<String> subtotals$ = unknown(); // ???
 		
 		// If implemented correctly, the application should display the following output:
 		//

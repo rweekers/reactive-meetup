@@ -34,10 +34,7 @@ public class Exercise03 {
 		// gate is occupied and another that tells when the gate is free. Next find a way to combine those streams to get the
 		// desired output.
 		
-		Observable<Boolean> gateIsFree$ = Observable.merge(
-			gateCheckEvent$.map((x) -> false),
-			gateCheckEvent$.debounce(GATE_OCCUPY_TIME, TimeUnit.MILLISECONDS).map((x) -> true)
-		).distinctUntilChanged().startWith(true);
+		Observable<Boolean> gateIsFree$ = unknown(); // ???
 		
 		// When implemented correctly you should see the following output:
 		// free, occupied, free, occupied, free, occupied, free, occupied, free
