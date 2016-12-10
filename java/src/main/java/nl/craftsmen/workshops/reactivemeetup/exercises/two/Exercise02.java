@@ -4,7 +4,7 @@ import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
 import rx.subjects.*;
 
-public class Exercise002 {
+public class Exercise02 {
 
 	public static void main(String[] args) {
 		

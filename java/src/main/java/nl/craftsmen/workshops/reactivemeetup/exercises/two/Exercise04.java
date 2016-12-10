@@ -7,7 +7,7 @@ import nl.craftsmen.workshops.reactivemeetup.domain.railway.TravelCostMatrix;
 import nl.craftsmen.workshops.reactivemeetup.util.RailwayStreams;
 import rx.Observable;
 
-public class Exercise004 {
+public class Exercise04 {
 	
 	private static final double NO_CHECKOUT_COST = 20.0;
 

@@ -11,7 +11,7 @@ import nl.craftsmen.workshops.reactivemeetup.domain.railway.TrainMetrics;
 import nl.craftsmen.workshops.reactivemeetup.util.RailwayStreams;
 import rx.Observable;
 
-public class Exercise006 {
+public class Exercise06 {
 
 	public static void main(String[] args) {
 		

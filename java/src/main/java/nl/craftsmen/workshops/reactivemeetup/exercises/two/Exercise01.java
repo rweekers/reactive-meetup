@@ -6,14 +6,16 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 
-public class Exercise001 {
+public class Exercise01 {
+	
+	private static final long EMIT_DELAY = 250;
 
 	public static void main(String[] args) {
 		
 		// ASSIGNMENT: Create a number$ observable stream that emits a number every 0.25 seconds. The numbers that are to be emitted by this
 		// stream should start with 1 and each subsequent number should be twice as much as the number that was previously emitted.
 		//
-		// HINT: To specify the 0.25 seconds, use 250 in combination with TimeUnit.MILLISECONDS.
+		// HINT: To specify the 0.25 seconds, use the EMIT_DELAY constant in combination with TimeUnit.MILLISECONDS.
 		//
 		// HINT: The sequence of numbers that should be emitted by the stream is equivalent to the following sequence:
 		// 2^0, 2^1, 2^2, 2^3, 2^4, ...
@@ -22,7 +24,7 @@ public class Exercise001 {
 		// With this function the equivalent of the sequence above is written as:
 		// pow(2, 0), pow(2, 1), pow(2, 2), pow(2, 3), pow(2, 4), ...
 		
-		Observable<Long> number$ = Observable.interval(250, TimeUnit.MILLISECONDS)
+		Observable<Long> number$ = Observable.interval(EMIT_DELAY, TimeUnit.MILLISECONDS)
 			.map((count) -> pow(2, count));
 		
 		// When implemented correctly you should see the following output:
