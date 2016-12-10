@@ -1,6 +1,6 @@
 package nl.craftsmen.workshops.reactivemeetup.domain.geometry;
 
-public class Triangle implements IShape {
+public class Triangle implements Shape {
 
     private final String name;
     private final int base;

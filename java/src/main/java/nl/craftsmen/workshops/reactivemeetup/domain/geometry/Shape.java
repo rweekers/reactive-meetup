@@ -1,6 +1,6 @@
 package nl.craftsmen.workshops.reactivemeetup.domain.geometry;
 
-public interface IShape {
+public interface Shape {
 
     double calculateArea();
 

@@ -1,6 +1,6 @@
 package nl.craftsmen.workshops.reactivemeetup.util;
 
-import nl.craftsmen.workshops.reactivemeetup.domain.cooking.EIngredientType;
+import nl.craftsmen.workshops.reactivemeetup.domain.cooking.IngredientType;
 import nl.craftsmen.workshops.reactivemeetup.domain.cooking.Ingredient;
 import nl.craftsmen.workshops.reactivemeetup.domain.geometry.*;
 import rx.Observable;
@@ -18,9 +18,9 @@ public class ExampleStreams {
     }
 
     public static Observable<Ingredient> ingredient$() {
-        return sample(Observable.from(new Ingredient[]{new Ingredient("Flour", EIngredientType.BASE),
-                new Ingredient("Suger", EIngredientType.SWEET), new Ingredient("Strawberry", EIngredientType.FRUIT),
-                new Ingredient("Salt", EIngredientType.BASE), new Ingredient("Pineapple", EIngredientType.FRUIT)}), 500);
+        return sample(Observable.from(new Ingredient[]{new Ingredient("Flour", IngredientType.BASE),
+                new Ingredient("Suger", IngredientType.SWEET), new Ingredient("Strawberry", IngredientType.FRUIT),
+                new Ingredient("Salt", IngredientType.BASE), new Ingredient("Pineapple", IngredientType.FRUIT)}), 500);
     }
 
     public static Observable<String> word$() {
@@ -28,8 +28,8 @@ public class ExampleStreams {
                 "moving", "of", "the", "vessel"}), 500);
     }
 
-    public static Observable<IShape> shape$() {
-        return sample(Observable.from(new IShape[]{new Circle("Circle 30", 30), new Circle("Circle 40", 40), new Square("Square 20", 20),
+    public static Observable<Shape> shape$() {
+        return sample(Observable.from(new Shape[]{new Circle("Circle 30", 30), new Circle("Circle 40", 40), new Square("Square 20", 20),
                 new Rectangle("Rectangle 50x20", 50, 20), new Triangle("Triangle 40x10", 40, 10), new Rectangle("Rectangle 45x40", 45, 40),
                 new Square("Square 30", 30), new Triangle("Triangle 40x45", 40, 45), new Rectangle("Rectangle 10x70", 10, 70)}), 500);
     }

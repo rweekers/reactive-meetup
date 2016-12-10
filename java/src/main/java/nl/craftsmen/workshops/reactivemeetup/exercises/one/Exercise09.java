@@ -2,7 +2,7 @@ package nl.craftsmen.workshops.reactivemeetup.exercises.one;
 
 import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
-import nl.craftsmen.workshops.reactivemeetup.domain.geometry.IShape;
+import nl.craftsmen.workshops.reactivemeetup.domain.geometry.Shape;
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import nl.craftsmen.workshops.reactivemeetup.util.Utils;
 import rx.Observable;
@@ -11,7 +11,7 @@ public class Exercise09 {
 
 	public static void main(String[] args) {
 		// The shape$ stream emits a sequence of varying shapes.
-		Observable<IShape> shape$ = ExampleStreams.shape$();
+		Observable<Shape> shape$ = ExampleStreams.shape$();
 		
 		// ASSIGNMENT: Display the circumference for all shapes whose surface area is larger than 500.
 		//

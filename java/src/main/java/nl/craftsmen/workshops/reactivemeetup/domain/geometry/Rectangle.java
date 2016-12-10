@@ -1,6 +1,6 @@
 package nl.craftsmen.workshops.reactivemeetup.domain.geometry;
 
-public class Rectangle implements IShape {
+public class Rectangle implements Shape {
 
     private final String name;
     private final int width;

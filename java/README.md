@@ -13,7 +13,7 @@ If not you can download the latest version from: [http://www.oracle.com/technetw
 
 You can find the exercises in the `nl.craftsmen.workshops.reactivemeetup.exercises` package.
 There are two subpackages `one` and `two` for both parts of the workshop.
-Within each of these packages you will find classes labeled `ExerciseXX` which contain executable `main()` methods.
+Within each of these packages you will find classes labelled `ExerciseXX` which contain executable `main()` methods.
 Every exercise class contains the necessary information and assignment to solve the exercise.
 None of the exercises depend on other exercises, so if necessary you can skip exercises (although we do not recommend that).
 
@@ -24,6 +24,13 @@ Furthermore visit the ReactiveX documentation page for more detailed information
 
 * [Overview of the ReactiveX operators](http://reactivex.io/documentation/operators.html)
 * [API documentation](http://reactivex.io/RxJava/javadoc/)
+
+_Please note that for the workshop we are using RxJava 1.2.1._
+_Shortly after the development of this workshop started, RxJava 2 was released._
+_We haven't had to time to upgrade the workshop to RxJava 2 yet._
+_So be careful if you search online for RxJava documentation, you might end up with the documentation for RxJava 2._
+_Although the API hasn't changed that much, there are some breaking changes in RxJava 2._
+_Hence always check if you were are looking at the right documentation if things don't appear to be working according to the docs ;)_
 
 ## Solutions
 

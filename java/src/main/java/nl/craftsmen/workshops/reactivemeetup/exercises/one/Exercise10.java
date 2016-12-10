@@ -2,7 +2,7 @@ package nl.craftsmen.workshops.reactivemeetup.exercises.one;
 
 import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
-import nl.craftsmen.workshops.reactivemeetup.domain.geometry.IShape;
+import nl.craftsmen.workshops.reactivemeetup.domain.geometry.Shape;
 import nl.craftsmen.workshops.reactivemeetup.domain.calculate.Subtotal;
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import rx.Observable;
@@ -10,7 +10,7 @@ import rx.Observable;
 public class Exercise10 {
 
     public static void main(String[] args) {
-        Observable<IShape> shape$ = ExampleStreams.shape$();
+        Observable<Shape> shape$ = ExampleStreams.shape$();
 
         // ASSIGNMENT: Compute the average surface area for all shapes that are emitted by the shape$ stream. Store the final
         // and intermediate results in the averageArea$ stream. Use both the scan and map operator for this assignment.

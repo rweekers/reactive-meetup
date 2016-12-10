@@ -3,7 +3,7 @@ package nl.craftsmen.workshops.reactivemeetup.exercises.one;
 import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
 import nl.craftsmen.workshops.reactivemeetup.domain.cooking.Cake;
-import nl.craftsmen.workshops.reactivemeetup.domain.cooking.EIngredientType;
+import nl.craftsmen.workshops.reactivemeetup.domain.cooking.IngredientType;
 import nl.craftsmen.workshops.reactivemeetup.domain.cooking.Ingredient;
 import nl.craftsmen.workshops.reactivemeetup.util.ExampleStreams;
 import rx.Observable;
@@ -19,7 +19,7 @@ public class Exercise08 {
         //
         // HINT: Use the following expression to check if an ingredient is fruit:
         //
-        //   EIngredientType.FRUIT.equals(ingredient.getType())
+        //   IngredientType.FRUIT.equals(ingredient.getType())
         //
         // HINT: When making the cake start with an "empty" cake: new Cake("Fruitcake")
         //

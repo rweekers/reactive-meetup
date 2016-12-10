@@ -54,6 +54,6 @@ public class Utils {
 	}
 	
 	public static <T> Observable<T> unknown() {
-		return Observable.error(new NoSuchElementException());
+		return Observable.error(new NoSuchElementException("You need to remove the unknown() call and add your own implementation there"));
 	}
 }
