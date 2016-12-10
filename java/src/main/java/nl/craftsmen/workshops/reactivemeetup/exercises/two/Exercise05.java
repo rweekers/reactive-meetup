@@ -44,6 +44,7 @@ public class Exercise05 {
 		Observable<Double> velocity$ = unknown(); // ???
 		
 		// When implemented correctly you should find a maximum velocity of ~ 140 Km/h.
+		
 		velocity$.subscribe(System.out::println);
 		
 		waitForStreamToComplete(velocity$);

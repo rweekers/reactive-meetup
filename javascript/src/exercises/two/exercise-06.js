@@ -62,6 +62,7 @@ const trainAction$ = null; // ???
 // HINT: Use RailwayStation.closestTo(position) to find the railway station closest to the specified LatLong coordinate.
 //
 // HINT: Uncomment the "messages$.subscribe(console.log);" line below to test your stream.
+
 const messages$ = null; // ???
 
 messages$.subscribe(console.log);

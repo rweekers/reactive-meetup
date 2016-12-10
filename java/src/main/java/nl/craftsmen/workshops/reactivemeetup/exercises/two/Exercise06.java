@@ -76,7 +76,6 @@ public class Exercise06 {
 		
 		Observable<String> messages$ = unknown(); // ???
 		
-
 		logAndWaitFor(messages$);
 	}
 	

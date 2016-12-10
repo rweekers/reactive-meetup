@@ -11,7 +11,6 @@ const shape$ = require('../../util/example-streams.js').shape$;
 
 const largestShape$ = null; // ???
 
-
 // If implemented correctly, only one line is printed to console:
 //   Circle 40: 5026.548245743669
 
