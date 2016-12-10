@@ -2,10 +2,10 @@ package nl.craftsmen.workshops.reactivemeetup.domain.geometry;
 
 public interface Shape {
 
-    double calculateArea();
+	double calculateArea();
 
-    double calculateCircumference();
+	double calculateCircumference();
 
-    String getName();
+	String getName();
 
 }

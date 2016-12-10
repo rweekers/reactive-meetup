@@ -20,8 +20,8 @@ public class Exercise11 {
 		Observable<Shape> largestShape$ = shape$
 			.reduce((a, b) -> {
 				if (a.calculateArea() > b.calculateArea())
-                    return a;
-                return b;
+					return a;
+				return b;
 			});
 		
 		// If implemented correctly, only one line is printed to console:
