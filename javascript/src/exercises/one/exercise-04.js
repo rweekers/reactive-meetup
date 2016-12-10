@@ -6,7 +6,8 @@ var number$ = require('../../util/example-streams.js').number$;
 //
 // HINT: You can make use of the utility function utils.isPrime to check if a given number is a prime number.
 
-const primeNumber$ = null; // ???
+const primeNumber$ = number$
+	.filter((i) => isPrime(i));
 
 // If implemented correctly, the application will output the following numbers: 1, 7, 2, 2, 7, 3
 

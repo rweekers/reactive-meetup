@@ -9,11 +9,17 @@ const shape$ = require('../../util/example-streams.js').shape$;
 // HINT: Reduce does not emit intermediate results, it may therefore take some time before the result is available and printed to the
 // console.
 
-const largestShape$ = null; // ???
+const largestShape$ =shape$
+	.reduce((a, b) => {
+		if (a.calculateArea() > b.calculateArea()) {
+			return a;
+		}
+		return b;
+	});
 
 
 // If implemented correctly, only one line is printed to console:
 //   Circle 40: 5026.548245743669
 
 largestShape$.map((i) => i.getName() + ': ' + i.calculateArea())
-    .subscribe((i) => console.log(i));
+	.subscribe((i) => console.log(i));

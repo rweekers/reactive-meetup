@@ -1,10 +1,10 @@
 module.exports = class GateCheckEvent {
 	
-    constructor(checkIn, timestamp, railwayStation) {
-        this.checkIn = checkIn;
-        this.timestamp = new Date();
-        this.railwayStation = railwayStation;
-    }
+	constructor(checkIn, timestamp, railwayStation) {
+		this.checkIn = checkIn;
+		this.timestamp = new Date();
+		this.railwayStation = railwayStation;
+	}
 	
 	isCheckIn() {
 		return this.checkIn;

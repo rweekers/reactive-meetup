@@ -23,7 +23,10 @@ const gateCheckEvent$ = require('../../util/railway-streams.js').gateCheckEvents
 // gate is occupied and another that tells when the gate is free. Next find a way to combine those streams to get the
 // desired output.
 
-const gateIsFree$ = null; // ???
+const gateIsFree$ = Rx.Observable.merge(
+	gateCheckEvent$.map((x) => false),
+	gateCheckEvent$.debounceTime(GATE_OCCUPY_TIME).map((x) => true)
+).distinctUntilChanged().startWith(true);
 
 // When implemented correctly you should see the following output:
 // free, occupied, free, occupied, free, occupied, free, occupied, free

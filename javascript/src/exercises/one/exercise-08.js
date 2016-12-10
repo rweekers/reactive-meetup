@@ -14,7 +14,9 @@ const Cake = require('../../domain/cooking/cake');
 //
 // HINT: You can add an ingredient to a cake using the addIngredient method.
 
-const cake$ = null; // ???
+const cake$ = ingredient$
+	.filter((ingredient) => ingredient.getType() === 'FRUIT')
+	.reduce((cake, ingredient) => cake.addIngredient(ingredient), new Cake('Fruitcake'));
 
 // If you've followed the recipe then you should end up with a delicious and healthy strawberry pineapple cake.
 

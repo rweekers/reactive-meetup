@@ -18,7 +18,9 @@ public class Exercise09 {
 		// HINT: You do not need to compute the circumference and surface area yourself. Instead you can use the following
 		// functions calculateCircumference() and calculateArea() provide by the IShape interface. 
 		
-		Observable<Double> circumference$ = unknown(); // ???
+		Observable<Double> circumference$ = shape$
+			.filter((i) -> i.calculateArea() > 500)
+			.map(Shape::calculateCircumference);
 		
 		// If implemented correctly you should see the following values:
 		//   188.50, 251.33, 2000.00, 3600.00, 120.00, 145.21, 1400.00

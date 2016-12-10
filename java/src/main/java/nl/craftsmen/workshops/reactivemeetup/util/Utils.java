@@ -23,8 +23,8 @@ public class Utils {
 	}
 
 	public static ZonedDateTime getZonedDateTime(int hour, int minute) {
-        return ZonedDateTime.of(2016, 12, 16, hour, minute, 0, 0, ZoneId.of("Europe/Amsterdam"));
-    }
+		return ZonedDateTime.of(2016, 12, 16, hour, minute, 0, 0, ZoneId.of("Europe/Amsterdam"));
+	}
 
 	public static boolean isPrime(Integer n) {
 		if (n < 1) {

@@ -22,7 +22,17 @@ const costMatrix = require('../../util/railway-streams.js').travelCostMatrix;
 //  - a.isCheckIn() && b.isCheckIn()   ->  NO_CHECKOUT_COST
 //  - otherwise                        ->  Nothing. You can represent this using one of the following: undefined, null or 0
 
-const travelCost$ = null; // ???
+const travelCost$ = personalCheckinsCheckouts$.zip(personalCheckinsCheckouts$.skip(1), 
+	(a, b) => {
+		if (a.isCheckIn() && b.isCheckOut()) {
+			return costMatrix.getTravelCost(a.getRailwayStation(), b.getRailwayStation());
+		} else if (a.isCheckIn() && b.isCheckIn()) {
+			return NO_CHECKOUT_COST;
+		}
+		return 0.0;
+	})
+	.filter((cost) => cost > 0)
+	.scan((a, b) => a + b);
 
 // When implemented correctly you should see the following output:
 // 7.5, 19.0, 39.0, 46.5
