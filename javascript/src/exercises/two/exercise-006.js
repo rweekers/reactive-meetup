@@ -5,8 +5,8 @@ const TrainMovementAction = require('../../domain/railway/train-movement-action'
 const RailwayStation = require('../../domain/railway/railway-station');
 
 // This is a bonus exercise that is bit more involved. Given are two streams. The first is trainMetrics$ stream, which is the same
-// stream you have already used in exercise 2.3. The second stream is the velocity$ stream that is derived from the trainMetrics$
-// stream (which is actually the solution of exercise 2.3). This exercise is split into three smaller exercises, which all need to
+// stream you have already used in exercise 2.5. The second stream is the velocity$ stream that is derived from the trainMetrics$
+// stream (which is actually the solution of exercise 2.5). This exercise is split into three smaller exercises, which all need to
 // be solved to accomplish the final goal: showing from which railway station the train departs and at which station it arrives.
 
 const trainMetrics$ = require('../../util/railway-streams.js').trainMetrics$;

@@ -8,7 +8,7 @@ import nl.craftsmen.workshops.reactivemeetup.domain.railway.GateCheckEvent;
 import nl.craftsmen.workshops.reactivemeetup.util.RailwayStreams;
 import rx.Observable;
 
-public class Exercise01 {
+public class Exercise003 {
 	
 	private static final long GATE_OCCUPY_TIME = 1500;
 
