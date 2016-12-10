@@ -56,4 +56,20 @@ public class Utils {
 	public static <T> Observable<T> unknown() {
 		return Observable.error(new NoSuchElementException("You need to remove the unknown() call and add your own implementation there"));
 	}
+	
+	public static void runDelayedAsync(long waitAmount, Runnable action) {
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(waitAmount);
+					action.run();
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}).start();
+		
+	}
 }

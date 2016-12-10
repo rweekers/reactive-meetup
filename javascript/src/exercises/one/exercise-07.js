@@ -7,7 +7,7 @@ const word$ = require('../../util/example-streams.js').word$;
 // results (the partial sentences) in the sentence$ stream.
 
 const sentence$ = word$
-	.scan((sum, item) => sum + ' ' + item);
+	.scan((partialSentence, word) => partialSentence + ' ' + word);
 
 // If implemented correctly you should now know what "jirble" means.
 

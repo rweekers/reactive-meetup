@@ -2,86 +2,57 @@ package nl.craftsmen.workshops.reactivemeetup.exercises.two;
 
 import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
-import java.util.Optional;
-
-import nl.craftsmen.workshops.reactivemeetup.domain.railway.MotionType;
-import nl.craftsmen.workshops.reactivemeetup.domain.railway.RailwayStation;
-import nl.craftsmen.workshops.reactivemeetup.domain.railway.TrainMovementAction;
-import nl.craftsmen.workshops.reactivemeetup.domain.railway.TrainMetrics;
+import nl.craftsmen.workshops.reactivemeetup.domain.railway.GateCheckEvent;
+import nl.craftsmen.workshops.reactivemeetup.domain.railway.TravelCostMatrix;
 import nl.craftsmen.workshops.reactivemeetup.util.RailwayStreams;
 import rx.Observable;
 
 public class Exercise04 {
+	
+	private static final double NO_CHECKOUT_COST = 20.0;
 
 	public static void main(String[] args) {
 		
-		// This is a bonus exercise that is bit more involved. Given are two streams. The first is trainMetrics$ stream, which is the same
-		// stream you have already used in exercise 2.3. The second stream is the velocity$ stream that is derived from the trainMetrics$
-		// stream (which is actually the solution of exercise 2.3). This exercise is split into three smaller exercises, which all need to
-		// be solved to accomplish the final goal: showing from which railway station the train departs and at which station it arrives.
+		TravelCostMatrix costMatrix = RailwayStreams.travelCostMatrix();
 		
-		Observable<TrainMetrics> trainMetrics$ = RailwayStreams.trainMetrics$();
+		// Each check-in and check-out event is associated with an "OV chipkaart". The gateCheckEvent$ stream below represents the stream
+		// of check-in and check-out events for a single "OV chipkaart". For every check-in/out the railway station is recorded. This
+		// information can be used to compute the travel cost for a journey. The price for journey from railway station A to B can be
+		// determined through the costMatrix object above. It might be possible that someone forgets to check in or check out. This
+		// situation can be detected by two successive check-in events. In that case the travel cost is 20 euros.
+		Observable<GateCheckEvent> gateCheckEvent$ = RailwayStreams.personalCheckinsCheckouts$();
 		
-		Observable<Double> velocity$ = RailwayStreams.velocity$(trainMetrics$);
+		// ASSIGNMENT: Given the gateCheckEvent$ of check-in and check-out events compute the cumulative travel cost. The resulting stream
+		// should emit the total travel cost for every new journey. Often it is possible to a use different set of operators to define 
+		// streams. This is also the case for this assignment. For example you can solve this assignment using the buffer operator. However,
+		// for this exercise we would like you to use another operator, so you are not allowed to use the buffer operator for this exercise.
+		//
+		// HINT: To solve this exercise you will first need to find a method to obtain a stream of two successive gate check-in/out events.
+		//
+		// HINT: For each pair (a, b) of GateCheckEvents use the following rules to determine the travel cost:
+		//  - a.isCheckIn() && b.isCheckOut()  ->  costMatrix.getTravelCost(a.getRailwayStation(), b.getRailwayStation())
+		//  - a.isCheckIn() && b.isCheckIn()   ->  NO_CHECKOUT_COST
+		//  - otherwise                        ->  Nothing. You can represent this using one of the following: Optional.empty(), null or 0.0
 		
-		// ASSIGNMENT: Using the velocity$ stream, define a new motion$ stream that describes the motion of the train using one of the 
-		// the following constants:
-		//  - MotionType.ACCELERATING    The train is accelerating (its velocity is increasing).
-		//  - MotionType.DECELERATING    The train is decelerating (its velocity is decreasing).
-		//  - MotionType.CONSTANT_SPEED  The train is moving at constant speed.
-		//  - MotionType.STATIONARY      The train is not moving at all.
-		//
-		// HINT: First try to get a stream that emits the acceleration for two subsequent emits of the velocity$ stream. 
-		//
-		// HINT: Use an epsilon value of 0.1 to determine if the train is accelerating or decelerating, i.e. the train is not accelerating /
-		// decelerating if the value of the acceleration is greater than -0.1 and less than 0.1.
-		//
-		// HINT: You cannot use the stream of acceleration values alone to differentiate between a train that is stationary and a train
-		// moving at constant speed, since the acceleration is 0 in both cases.
-		//
-		// HINT: Uncomment the "logAndWaitFor(motion$)" line below to test your stream.
+		Observable<Double> travelCost$ = gateCheckEvent$
+			.zipWith(gateCheckEvent$.skip(1), (a, b) -> {
+				if (a.isCheckIn() && b.isCheckOut()) {
+					return costMatrix.getTravelCost(a.getRailwayStation(), b.getRailwayStation());
+				} else if (a.isCheckIn() && b.isCheckIn()) {
+					return NO_CHECKOUT_COST;
+				}
+				return 0.0;
+			})
+			.filter((cost) -> cost > 0)
+			.scan((a, b) -> a + b);
 		
-		Observable<MotionType> motion$ = unknown(); // ???
+		// When implemented correctly you should see the following output:
+		// 7.5, 19.0, 39.0, 46.5
 		
-		//logAndWaitFor(motion$);
+		travelCost$.subscribe(System.out::println);
 		
-		// ASSIGNMENT: With the motion$ stream, defined above, it is possible to detect whether a train is departing or arriving. Use the
-		// following constants and conditions to define a trainAction$ stream that indicates when a train is departing or arriving at a
-		// railway station:
-		//  - TrainMovementAction.DEPARTING  If the motion changes from STATIONARY to ACCELERATING.
-		//  - TrainMovementAction.ARRIVING   If the motion changes from DECELERATING to STATIONARY.
-		// For other motion transitions that do not match one the condition above the trainAction$ stream should not emit any value.
-		//
-		// HINT: We'll assume trains do not encounter any malfunctions or obstructions on the railway network and as such we can safely
-		// assume that whenever a train starts decelerating it will always stop at a railway station.
-		//
-		// HINT: Use Optional.empty() or null in case irrelevant motion transitions are detected and filter them out in a second step.
-		//
-		// HINT: Uncomment the "logAndWaitFor(trainAction$)" line below to test your stream.
+		waitForStreamToComplete(travelCost$);
 		
-		Observable<TrainMovementAction> trainAction$ = unknown(); // ???
-		
-		//logAndWaitFor(trainAction$);
-		
-		// ASSIGNMENT: Using the trainAction$ and trainMetrics$ streams, define a new message$ stream that emits a message whenever a
-		// train arrives or departs at a railway station including the name of that station. The output should be something like this:
-		//  - Departing from stationA
-		//  - Arriving at stationB
-		//
-		// HINT: For this exercise you have to use an operator that you (probably) have not used before in the other exercises.
-		//
-		// HINT: Use RailwayStation.closestTo(position) to find the railway station closest to the specified LatLong coordinate.
-		//
-		// HINT: Uncomment the "logAndWaitFor(messages$)" line below to test your stream.
-		
-		Observable<String> messages$ = unknown(); // ???
-
-		logAndWaitFor(messages$);
 	}
 	
-	private static void logAndWaitFor(Observable<?> stream$) {
-		stream$.subscribe(System.out::println);		
-		waitForStreamToComplete(stream$);		
-	}
-
 }

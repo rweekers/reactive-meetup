@@ -4,44 +4,41 @@ import static nl.craftsmen.workshops.reactivemeetup.util.Utils.*;
 
 import java.util.concurrent.TimeUnit;
 
-import nl.craftsmen.workshops.reactivemeetup.domain.railway.GateCheckEvent;
-import nl.craftsmen.workshops.reactivemeetup.util.RailwayStreams;
 import rx.Observable;
 
 public class Exercise01 {
 	
-	private static final long GATE_OCCUPY_TIME = 1500;
+	private static final long EMIT_DELAY = 250;
 
 	public static void main(String[] args) {
-		// With the introduction of the "OV chipkaart" in the Netherlands, every person that wishes to travel by train needs to
-		// check in and check out with their "OV chipkaart". Many railway stations have adopted gates which (in the future) can
-		// only be opened by either checking in or checking out. The gateCheckEvent$ stream below represents the checkins and 
-		// checkouts for such a gate at a railway station.
-		Observable<GateCheckEvent> gateCheckEvent$ = RailwayStreams.gateCheckEvent$();
 		
-		// ASSIGNMENT: Define the gateIsFree$ stream based on the provided gateCheckEvent$. This stream should emit boolean
-		// values, where true indicates that the gate is free and false indicates that is occupied (being used by someone).
+		// ASSIGNMENT: Create a number$ observable stream that emits a number every 0.25 seconds. The numbers that are to be emitted by this
+		// stream should start with 1 and each subsequent number should be twice as much as the number that was previously emitted.
 		//
-		// Note that the stream should emit alternating values, i.e. two successive values may not be the same. For example,
-		// "true, true, false" is not a valid output, while "true, false, true" is okay.
+		// HINT: To specify the 0.25 seconds, use the EMIT_DELAY constant in combination with TimeUnit.MILLISECONDS.
 		//
-		// A gate is considered to be free if in the last 1,5 seconds nobody has checked in or out. Initially the gate is
-		// considered to be free, so your output should always start with "true".
+		// HINT: The sequence of numbers that should be emitted by the stream is equivalent to the following sequence:
+		// 2^0, 2^1, 2^2, 2^3, 2^4, ...
 		//
-		// HINT: To specify the 1,5 second interval use the GATE_OCCUPY_TIME constant in combination with TimeUnit.MILLISECONDS.
-		//
-		// HINT: Solve this assignment using divide and conquer. First try to define two streams, one that tells whenever the
-		// gate is occupied and another that tells when the gate is free. Next find a way to combine those streams to get the
-		// desired output.
+		// HINT: Use the pow function below as variation of the Math.pow function, which operates on long values instead of double values.
+		// With this function the equivalent of the sequence above is written as:
+		// pow(2, 0), pow(2, 1), pow(2, 2), pow(2, 3), pow(2, 4), ...
 		
-		Observable<Boolean> gateIsFree$ = unknown(); // ???
+		Observable<Long> number$ = Observable.interval(EMIT_DELAY, TimeUnit.MILLISECONDS)
+			.map((count) -> pow(2, count));
 		
 		// When implemented correctly you should see the following output:
-		// free, occupied, free, occupied, free, occupied, free, occupied, free
+		// 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024
 		
-		gateIsFree$.subscribe((free) -> System.out.println(free ? "free" : "occupied"));
+		Observable<Long> limitedNumber$ = number$.take(11);
 		
-		waitForStreamToComplete(gateIsFree$);
+		limitedNumber$.subscribe(System.out::println);
+		
+		waitForStreamToComplete(limitedNumber$);
+	}
+	
+	private static long pow(long base, long exponent) {
+		return (long) Math.pow(base, exponent);
 	}
 	
 }

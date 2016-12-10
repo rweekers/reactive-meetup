@@ -15,7 +15,7 @@ public class Exercise07 {
 		// results (the partial sentences) in the sentence$ stream.
 		
 		Observable<String> sentence$ = word$
-			.scan((sum, item) -> sum + " " + item);
+			.scan((partialSentence, word) -> partialSentence + " " + word);
 		
 		// If implemented correctly you should now know what "jirble" means.
 		
