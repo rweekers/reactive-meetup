@@ -23,6 +23,13 @@ You can download / view the sheets through the link below:
 
 [sheets.pdf](https://gitlab.com/craftsmen/reactive-meetup/raw/master/sheets.pdf)
 
+## Demo application
+
+During the workshop we showed a demo application, which illustrates the difference between a 'traditional' and 'reactive' programming style.
+This demo application can be found at the following repository:
+
+[https://gitlab.com/craftsmen/reactive-meetup-demo](https://gitlab.com/craftsmen/reactive-meetup-demo)
+
 ## Resources
 * [ReactiveX operator overview](http://reactivex.io/documentation/operators.html)
 * [RxJS choosing an operator](http://reactivex.io/rxjs/manual/overview.html#choose-an-operator)
