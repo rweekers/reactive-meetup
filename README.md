@@ -46,3 +46,4 @@ Below you will find some links to articles and presentations that we recommend i
 * [Reactive Programming by Venkat Subramaniam @ Devoxx Belgium 2016](https://www.youtube.com/watch?v=weWSYIUdX6c)
 * [Reactive Web Applications with Spring 5 by Rossen Stoyanchev @ Devoxx Belgium 2016](https://www.youtube.com/watch?v=rdgJ8fOxJhc)
 * [Angular & RxJS by Rob Wormald at ng-europe 2016](https://www.youtube.com/watch?v=WWR9nxVx1ec)
+* [Writing Marble Tests](https://github.com/ReactiveX/rxjs/blob/master/doc/writing-marble-tests.md)
